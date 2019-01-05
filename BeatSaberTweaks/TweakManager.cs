@@ -10,10 +10,8 @@ using VRUI;
 using VRUIControls;
 using TMPro;
 using IllusionPlugin;
-
-#if NewUI
-using BeatSaberUI;
-#endif
+using CustomUI.BeatSaber;
+using CustomUI.Settings;
 
 namespace BeatSaberTweaks
 {
@@ -22,8 +20,6 @@ namespace BeatSaberTweaks
         public static TweakManager Instance = null;
         MainMenuViewController _mainMenuViewController = null;
         SimpleDialogPromptViewController prompt = null;
-
-        static MainGameSceneSetupData _mainGameSceneSetupData = null;
 
         float carTime = 0;
 
@@ -42,7 +38,7 @@ namespace BeatSaberTweaks
                 SceneManager.sceneLoaded += SceneManager_sceneLoaded;
                 DontDestroyOnLoad(gameObject);
 
-                Console.WriteLine("Tweak Manager started.");
+                Plugin.Log("Tweak Manager started.", Plugin.LogLevel.DebugOnly);
 
                 MoveEnergyBar.OnLoad(transform);
                 ScoreMover.OnLoad(transform);
@@ -60,11 +56,16 @@ namespace BeatSaberTweaks
 
         private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
-            //Console.WriteLine("Loaded: " + arg0.name);
+            if(arg0.name == "Menu")
+            CreateUI();
         }
 
         public void Update()
         {
+            /*
+             * TODO
+             * This is to enable the flying cars easteregg.
+             * Is this even still in the game?
             if (SettingsUI.isMenuScene(SceneManager.GetActiveScene()))
             {
                 if (_mainMenuViewController.childViewController == null &&
@@ -85,8 +86,12 @@ namespace BeatSaberTweaks
                     carTime = 0;
                 }
             }
+            */
         }
 
+        /*
+         * TODO
+         * More flyingcars stuff
         private void CarEvent(SimpleDialogPromptViewController viewController, bool ok)
         {
             viewController.didFinishEvent -= CarEvent;
@@ -97,20 +102,17 @@ namespace BeatSaberTweaks
             FlyingCar.startflyingCars = ok;
             viewController.DismissModalViewController(null, false);
         }
+        */
 
         public static bool IsPartyMode()
         {
-            if (_mainGameSceneSetupData == null)
-            {
-                _mainGameSceneSetupData = Resources.FindObjectsOfTypeAll<MainGameSceneSetupData>().FirstOrDefault();
-            }
-
-            if (_mainGameSceneSetupData == null)
-            {
+            Plugin.Log(Plugin.party.ToString(), Plugin.LogLevel.Info);
+            if (Plugin.party)
+                return true;
+            else
                 return false;
-            }
 
-            return _mainGameSceneSetupData.gameplayMode == GameplayMode.PartyStandard;
+
         }
 
         public void SceneManagerOnActiveSceneChanged(Scene arg0, Scene scene)
@@ -118,22 +120,26 @@ namespace BeatSaberTweaks
             try
             {
                 //Console.WriteLine("Active: " + scene.name);
-                if (SettingsUI.isMenuScene(scene))
+                if (SceneUtils.isMenuScene(scene))
                 {
+                    Plugin.Log("TweakManager isMenuScene", Plugin.LogLevel.DebugOnly);
                     _mainMenuViewController = Resources.FindObjectsOfTypeAll<MainMenuViewController>().First();
-                    var _menuMasterViewController = Resources.FindObjectsOfTypeAll<StandardLevelSelectionFlowCoordinator>().First();
-                    prompt = ReflectionUtil.GetPrivateField<SimpleDialogPromptViewController>(_menuMasterViewController, "_simpleDialogPromptViewController");
-
-                    CreateUI();
+                    //var _menuMasterViewController = Resources.FindObjectsOfTypeAll<StandardLevelSelectionFlowCoordinator>().First();
+                    //prompt = ReflectionUtil.GetPrivateField<SimpleDialogPromptViewController>(_menuMasterViewController, "_simpleDialogPromptViewController");
+                }
+                else
+                {
+                    Plugin.Log("TweakManager not in menu scene", Plugin.LogLevel.DebugOnly);
                 }
             }catch (Exception e)
             {
-                Console.WriteLine("Tweaks (Manager) done fucked up: " + e);
+                Plugin.Log("TweakManager scene changed error: " + e, Plugin.LogLevel.Error);
             }
         }
 
         private void CreateUI()
         {
+            Plugin.Log("TweakManager creating the BSTweaks UI", Plugin.LogLevel.DebugOnly);
             var subMenu2 = SettingsUI.CreateSubMenu("Interface Tweaks");
 
             var energyBar = subMenu2.AddBool("Move Energy Bar");
@@ -290,6 +296,7 @@ namespace BeatSaberTweaks
         }
         */
 
+        /*
         private void Prompt_didFinishEvent(SimpleDialogPromptViewController viewController, bool ok)
         {
             viewController.didFinishEvent -= Prompt_didFinishEvent;
@@ -307,5 +314,6 @@ namespace BeatSaberTweaks
             }
             viewController.DismissModalViewController(null, false);
         }
+        */
     }
 }
