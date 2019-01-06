@@ -38,7 +38,6 @@ namespace BeatSaberTweaks
             _init = true;
 
             Settings.Load();
-            //SettingsUI.OnLoad();
             TweakManager.OnLoad();
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
         }
