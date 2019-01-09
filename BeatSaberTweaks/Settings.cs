@@ -46,6 +46,48 @@ namespace BeatSaberTweaks
         Vector3 clockRotation = new Vector3(0, 0, 0);
         public static Quaternion ClockRotation { get => Quaternion.Euler(instance.clockRotation); set => instance.clockPosition = value.eulerAngles; }
 
+        // Time Spent Clock
+        [SerializeField]
+        bool showTimeSpentClock = false;
+        public static bool ShowTimeSpentClock { get => instance.showTimeSpentClock; set => instance.showTimeSpentClock = value; }
+
+        [SerializeField]
+        bool hideTimeSpentClockIngame = false;
+        public static bool HideTimeSpentClockIngame { get => instance.hideTimeSpentClockIngame; set => instance.hideTimeSpentClockIngame = value; }
+
+        [SerializeField]
+        float timeSpentClockFontSize = 4.0f;
+        public static float TimeSpentClockFontSize { get => instance.timeSpentClockFontSize; set => instance.timeSpentClockFontSize = value; }
+
+        [SerializeField]
+        Vector3 timeSpentClockPosition = new Vector3(0, 0.35f, 2.4f);
+        public static Vector3 TimeSpentClockPosition { get => instance.timeSpentClockPosition; set => instance.timeSpentClockPosition = value; }
+
+        [SerializeField]
+        Vector3 timeSpentClockRotation = new Vector3(0, 0, 0);
+        public static Quaternion TimeSpentClockRotation { get => Quaternion.Euler(instance.timeSpentClockRotation); set => instance.timeSpentClockRotation = value.eulerAngles; }
+
+        // Ingame Time Spent Clock
+        [SerializeField]
+        bool showIngameTimeSpentClock = false;
+        public static bool ShowIngameTimeSpentClock { get => instance.showIngameTimeSpentClock; set => instance.showIngameTimeSpentClock = value; }
+
+        [SerializeField]
+        bool hideIngameTimeSpentClockIngame = false;
+        public static bool HideIngameTimeSpentClockIngame { get => instance.hideIngameTimeSpentClockIngame; set => instance.hideIngameTimeSpentClockIngame = value; }
+
+        [SerializeField]
+        float ingameTimeSpentClockFontSize = 4.0f;
+        public static float IngameTimeSpentClockFontSize { get => instance.ingameTimeSpentClockFontSize; set => instance.ingameTimeSpentClockFontSize = value; }
+
+        [SerializeField]
+        Vector3 ingameTimeSpentClockPosition = new Vector3(0, 0.25f, 2.4f);
+        public static Vector3 IngameTimeSpentClockPosition { get => instance.ingameTimeSpentClockPosition; set => instance.ingameTimeSpentClockPosition = value; }
+
+        [SerializeField]
+        Vector3 ingameTimeSpentClockRotation = new Vector3(0, 0, 0);
+        public static Quaternion IngameTimeSpentClockRotation { get => Quaternion.Euler(instance.ingameTimeSpentClockRotation); set => instance.ingameTimeSpentClockRotation = value.eulerAngles; }
+
         // Move Energy Bar
         [SerializeField]
         bool moveEnergyBar = false;

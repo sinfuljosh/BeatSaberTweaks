@@ -1,0 +1,125 @@
+﻿using System;
+using System.Collections;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace BeatSaberTweaks
+{
+    public class TimeSpentClock : MonoBehaviour
+    {
+        public static TimeSpentClock Instance;
+
+        private static GameObject _TimeSpentClockCanvas = null;
+        private static TextMeshProUGUI _Text = null;
+        private static Vector3 _TimePos;
+        private static Quaternion _TimeRot;
+        private static float _TimeSize;
+        private static bool _HideWhilePlaying;
+
+        private DateTime _StartTime;
+        private TimeSpan _TimeSpent;
+        private Coroutine _CUpdateTimeSpentClock;
+
+        private bool _IsPlayerIngame;
+
+        public static void OnLoad(Transform parent)
+        {
+            if (Instance != null) return;
+            Plugin.Log("Creating TimeSpentClock.", Plugin.LogLevel.DebugOnly);
+            new GameObject("TimeSpentClock").AddComponent<TimeSpentClock>().transform.parent = parent;
+        }
+
+        public void Awake()
+        {
+            if (Instance == null)
+            {
+                Plugin.Log("TimeSpentClock awake.", Plugin.LogLevel.DebugOnly);
+                Instance = this;
+                SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
+                DontDestroyOnLoad(gameObject);
+                _TimePos = Settings.TimeSpentClockPosition;
+                _TimeRot = Settings.TimeSpentClockRotation;
+                _TimeSize = Settings.TimeSpentClockFontSize;
+                _HideWhilePlaying = Settings.HideTimeSpentClockIngame;
+                _StartTime = DateTime.Now;
+                _IsPlayerIngame = false;
+            }
+            else
+                Destroy(this);
+        }
+
+        public void SceneManagerOnActiveSceneChanged(Scene arg0, Scene scene)
+        {
+            Plugin.Log("TimeSpentClock SceneManagerOnActiveSceneChanged: " + arg0.name + " " + scene.name, Plugin.LogLevel.DebugOnly);
+            try
+            {
+                if (SceneUtils.isMenuScene(scene) && _TimeSpentClockCanvas == null)
+                {
+                    Plugin.Log("Creating the TimeSpentClock object... ", Plugin.LogLevel.DebugOnly);
+                    _TimeSpentClockCanvas = new GameObject();
+                    DontDestroyOnLoad(_TimeSpentClockCanvas);
+                    _TimeSpentClockCanvas.AddComponent<Canvas>();
+
+                    _TimeSpentClockCanvas.name = "TimeSpentClock Canvas";
+                    _TimeSpentClockCanvas.transform.position = _TimePos;
+                    _TimeSpentClockCanvas.transform.rotation = _TimeRot;
+                    _TimeSpentClockCanvas.transform.localScale = new Vector3(0.02f, 0.02f, 1.0f);
+
+                    var textGO = new GameObject();
+                    textGO.transform.SetParent(_TimeSpentClockCanvas.transform);
+                    textGO.transform.localPosition = Vector3.zero;
+                    textGO.transform.localRotation = Quaternion.identity;
+                    textGO.transform.localScale = Vector3.one;
+
+                    _Text = textGO.AddComponent<TextMeshProUGUI>();
+                    _Text.name = "TimeSpentClock Text";
+                    _Text.alignment = TextAlignmentOptions.Center;
+                    _Text.fontSize = _TimeSize;
+                    _Text.text = "";
+
+                    _CUpdateTimeSpentClock = StartCoroutine(UpdateTimeSpentClock());
+
+                    _TimeSpentClockCanvas.SetActive(Settings.ShowTimeSpentClock);
+                }
+            }
+            catch (Exception e)
+            {
+                Plugin.Log("TimeSpentClock error: " + e, Plugin.LogLevel.DebugOnly);
+            }
+
+            if (_TimeSpentClockCanvas != null)
+            {
+                _IsPlayerIngame = SceneUtils.isGameScene(scene);
+                if (_HideWhilePlaying)
+                    _TimeSpentClockCanvas.SetActive(!_IsPlayerIngame);
+            }
+        }
+
+        public void Update()
+        {
+            if (_TimeSpentClockCanvas != null && Settings.ShowTimeSpentClock != _TimeSpentClockCanvas.activeSelf && !_IsPlayerIngame)
+                _TimeSpentClockCanvas.SetActive(Settings.ShowTimeSpentClock);
+        }
+
+        public IEnumerator UpdateTimeSpentClock()
+        {
+            Plugin.Log("TimeSpentClock UpdateTimeSpentClock function called.", Plugin.LogLevel.DebugOnly);
+            while (_Text != null)
+            {
+                _TimeSpent = DateTime.Now - _StartTime;
+                if (_TimeSpent.Hours == 0)
+                {
+                    if (_TimeSpent.Minutes == 0)
+                        _Text.text = "You spent " + string.Format("{0:00}s", _TimeSpent.Seconds) + " this session.";
+                    else
+                        _Text.text = "You spent " + string.Format("{0:00}m {1:00}s", _TimeSpent.Minutes, _TimeSpent.Seconds) + " this session.";
+                }
+                else
+                    _Text.text = "You spent " + string.Format("{0:00}h {1:00}m {2:00}s", _TimeSpent.Hours, _TimeSpent.Minutes, _TimeSpent.Seconds) + " this session.";
+
+                yield return new WaitForSeconds(1f);
+            }
+        }
+    }
+}

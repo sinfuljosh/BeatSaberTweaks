@@ -21,7 +21,11 @@ namespace BeatSaberTweaks
         MainMenuViewController _mainMenuViewController = null;
         SimpleDialogPromptViewController prompt = null;
 
+        /*
+         * TODO
+         * FlyingCars here too
         float carTime = 0;
+        */
 
         public static void OnLoad()
         {
@@ -43,6 +47,8 @@ namespace BeatSaberTweaks
                 MoveEnergyBar.OnLoad(transform);
                 ScoreMover.OnLoad(transform);
                 InGameClock.OnLoad(transform);
+                TimeSpentClock.OnLoad(transform);
+                IngameTimeSpentClock.OnLoad(transform);
                 NoteHitVolume.OnLoad(transform);
                 MenuBGVolume.OnLoad(transform);
                 OneColour.OnLoad(transform);
@@ -87,24 +93,24 @@ namespace BeatSaberTweaks
                 }
             }
             */
-        }
+    }
 
-        /*
-         * TODO
-         * More flyingcars stuff
-        private void CarEvent(SimpleDialogPromptViewController viewController, bool ok)
+    /*
+     * TODO
+     * More flyingcars stuff
+    private void CarEvent(SimpleDialogPromptViewController viewController, bool ok)
+    {
+        viewController.didFinishEvent -= CarEvent;
+        if (viewController.isRebuildingHierarchy)
         {
-            viewController.didFinishEvent -= CarEvent;
-            if (viewController.isRebuildingHierarchy)
-            {
-                return;
-            }
-            FlyingCar.startflyingCars = ok;
-            viewController.DismissModalViewController(null, false);
+            return;
         }
-        */
+        FlyingCar.startflyingCars = ok;
+        viewController.DismissModalViewController(null, false);
+    }
+    */
 
-        public static bool IsPartyMode()
+    public static bool IsPartyMode()
         {
             Plugin.Log(Plugin.party.ToString(), Plugin.LogLevel.Info);
             if (Plugin.party)
@@ -140,7 +146,7 @@ namespace BeatSaberTweaks
         private void CreateUI()
         {
             Plugin.Log("TweakManager creating the BSTweaks UI", Plugin.LogLevel.DebugOnly);
-            var subMenu2 = SettingsUI.CreateSubMenu("Interface Tweaks");
+            var subMenu2 = SettingsUI.CreateSubMenu("Interface Tweaks [1]");
 
             var energyBar = subMenu2.AddBool("Move Energy Bar");
             energyBar.GetValue += delegate { return Settings.MoveEnergyBar; };
@@ -162,6 +168,24 @@ namespace BeatSaberTweaks
                 InGameClock.UpdateClock();
             };
 
+            var subMenu3 = SettingsUI.CreateSubMenu("Interface Tweaks [2]");
+
+            var showTimeSpentClock = subMenu3.AddBool("Show Time Spent");
+            showTimeSpentClock.GetValue += delegate { return Settings.ShowTimeSpentClock; };
+            showTimeSpentClock.SetValue += delegate (bool value) { Settings.ShowTimeSpentClock = value; };
+
+            var showIngameTimeSpentClock = subMenu3.AddBool("Show Ingame Time Spent");
+            showIngameTimeSpentClock.GetValue += delegate { return Settings.ShowIngameTimeSpentClock; };
+            showIngameTimeSpentClock.SetValue += delegate (bool value) { Settings.ShowIngameTimeSpentClock = value; };
+
+            var hideTimeSpentClockIngame = subMenu3.AddBool("Hide Time Spent While Playing");
+            hideTimeSpentClockIngame.GetValue += delegate { return Settings.HideTimeSpentClockIngame; };
+            hideTimeSpentClockIngame.SetValue += delegate (bool value) { Settings.HideTimeSpentClockIngame = value; };
+
+            var hideIngameTimeSpentClockIngame = subMenu3.AddBool("Hide Ingame Time Spent While Playing");
+            hideIngameTimeSpentClockIngame.GetValue += delegate { return Settings.HideIngameTimeSpentClockIngame; };
+            hideIngameTimeSpentClockIngame.SetValue += delegate (bool value) { Settings.HideIngameTimeSpentClockIngame = value; };
+
             var subMenu1 = SettingsUI.CreateSubMenu("Volume Tweaks");
 
             var noteHit = subMenu1.AddList("Note Hit Volume", volumeValues());
@@ -179,25 +203,25 @@ namespace BeatSaberTweaks
             menuBG.SetValue += delegate (float value) { Settings.MenuBGVolume = value; };
             menuBG.FormatValue += delegate (float value) { return string.Format("{0:0.0}", value); };
 
-            var subMenu3 = SettingsUI.CreateSubMenu("Party Mode Tweaks");
+            var subMenu4 = SettingsUI.CreateSubMenu("Party Mode Tweaks");
 
-            var noArrows = subMenu3.AddBool("No Arrows");
+            var noArrows = subMenu4.AddBool("No Arrows");
             noArrows.GetValue += delegate { return Settings.NoArrows; };
             noArrows.SetValue += delegate (bool value) { Settings.NoArrows = value; };
 
-            var oneColour = subMenu3.AddBool("One Color");
+            var oneColour = subMenu4.AddBool("One Color");
             oneColour.GetValue += delegate { return Settings.OneColour; };
             oneColour.SetValue += delegate (bool value) { Settings.OneColour = value; };
 
-            var removeBombs = subMenu3.AddBool("Remove Bombs");
+            var removeBombs = subMenu4.AddBool("Remove Bombs");
             removeBombs.GetValue += delegate { return Settings.RemoveBombs; };
             removeBombs.SetValue += delegate (bool value) { Settings.RemoveBombs = value; };
 
-            var overrideNoteSpeed = subMenu3.AddBool("Override Note Speed");
+            var overrideNoteSpeed = subMenu4.AddBool("Override Note Speed");
             overrideNoteSpeed.GetValue += delegate { return Settings.OverrideJumpSpeed; };
             overrideNoteSpeed.SetValue += delegate (bool value) { Settings.OverrideJumpSpeed = value; };
 
-            var noteSpeed = subMenu3.AddList("Note Speed", noteSpeeds());
+            var noteSpeed = subMenu4.AddList("Note Speed", noteSpeeds());
             noteSpeed.GetValue += delegate { return Settings.NoteJumpSpeed; };
             noteSpeed.SetValue += delegate (float value) { Settings.NoteJumpSpeed = value; };
             noteSpeed.FormatValue += delegate (float value) { return string.Format("{0:0}", value); };
