@@ -61,11 +61,11 @@ namespace BeatSaberTweaks
         public static bool MoveScore { get => instance.moveScore; set => instance.moveScore = value; }
 
         [SerializeField]
-        float scoreSize = 4.0f;
+        float scoreSize = 2.0f;
         public static float ScoreSize { get => instance.scoreSize; set => instance.scoreSize = value; }
 
         [SerializeField]
-        Vector3 scorePosition = new Vector3(3.3f, 2.5f, 7.0f);
+        Vector3 scorePosition = new Vector3(3.25f, 3.25f, 7.0f);
         public static Vector3 ScorePosition { get => instance.scorePosition; set => instance.scorePosition = value; }
 
         [SerializeField]
