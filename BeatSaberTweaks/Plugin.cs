@@ -21,7 +21,7 @@ namespace BeatSaberTweaks
 
         private static PracticeViewController _practiceViewController;
         private static StandardLevelDetailViewController _soloDetailView;
-        private static bool debug = true;
+        private static bool debug = false;
         public static bool party { get; private set; } = false;
 
         public static string _gameplayMode { get; private set; }
