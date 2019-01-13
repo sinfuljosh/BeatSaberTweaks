@@ -9,7 +9,7 @@ namespace BeatSaberTweaks
     {
         public string Name => "Beat Saber Tweaks";
 #if NewUI
-        public string Version => "4.0.1";
+        public string Version => "4.1.0";
 #else
         public string Version => "3.3.2";
 #endif
