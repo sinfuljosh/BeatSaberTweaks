@@ -111,12 +111,12 @@ namespace BeatSaberTweaks
                 if (_TimeSpent.Hours == 0)
                 {
                     if (_TimeSpent.Minutes == 0)
-                        _Text.text = "You spent " + string.Format("{0:00}s", _TimeSpent.Seconds) + " this session.";
+                        _Text.text = "You've spent " + string.Format("{0:00}s", _TimeSpent.Seconds) + " in this session.";
                     else
-                        _Text.text = "You spent " + string.Format("{0:00}m {1:00}s", _TimeSpent.Minutes, _TimeSpent.Seconds) + " this session.";
+                        _Text.text = "You've spent " + string.Format("{0:00}m {1:00}s", _TimeSpent.Minutes, _TimeSpent.Seconds) + " in this session.";
                 }
                 else
-                    _Text.text = "You spent " + string.Format("{0:00}h {1:00}m {2:00}s", _TimeSpent.Hours, _TimeSpent.Minutes, _TimeSpent.Seconds) + " this session.";
+                    _Text.text = "You've spent " + string.Format("{0:00}h {1:00}m {2:00}s", _TimeSpent.Hours, _TimeSpent.Minutes, _TimeSpent.Seconds) + " in this session.";
 
                 yield return new WaitForSeconds(1f);
             }
