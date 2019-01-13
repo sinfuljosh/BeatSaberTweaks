@@ -52,7 +52,7 @@ namespace BeatSaberTweaks
         public static bool ShowTimeSpentClock { get => instance.showTimeSpentClock; set => instance.showTimeSpentClock = value; }
 
         [SerializeField]
-        bool hideTimeSpentClockIngame = false;
+        bool hideTimeSpentClockIngame = true;
         public static bool HideTimeSpentClockIngame { get => instance.hideTimeSpentClockIngame; set => instance.hideTimeSpentClockIngame = value; }
 
         [SerializeField]
@@ -73,7 +73,7 @@ namespace BeatSaberTweaks
         public static bool ShowIngameTimeSpentClock { get => instance.showIngameTimeSpentClock; set => instance.showIngameTimeSpentClock = value; }
 
         [SerializeField]
-        bool hideIngameTimeSpentClockIngame = false;
+        bool hideIngameTimeSpentClockIngame = true;
         public static bool HideIngameTimeSpentClockIngame { get => instance.hideIngameTimeSpentClockIngame; set => instance.hideIngameTimeSpentClockIngame = value; }
 
         [SerializeField]
