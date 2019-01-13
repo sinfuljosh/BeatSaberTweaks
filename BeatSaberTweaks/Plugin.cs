@@ -9,7 +9,7 @@ namespace BeatSaberTweaks
     {
         public string Name => "Beat Saber Tweaks";
 #if NewUI
-        public string Version => "4.0";
+        public string Version => "4.0.1";
 #else
         public string Version => "3.3.2";
 #endif
@@ -124,7 +124,7 @@ namespace BeatSaberTweaks
 
         public static void Log(string input, Plugin.LogLevel logLvl)
         {
-            if (logLvl >= LogLevel.Info || debug) Console.WriteLine("[! ! ! ! Beat Saber Tweaks ! ! ! !]: " + input);
+            if (logLvl >= LogLevel.Info || debug) Console.WriteLine("[Beat Saber Tweaks]: " + input);
         }
     }
 }
