@@ -16,6 +16,7 @@ namespace BeatSaberTweaks
         private static Quaternion _TimeRot;
         private static float _TimeSize;
         private static bool _HideWhilePlaying;
+        private static String _MessageTemplate;
 
         private DateTime _StartTime;
         private TimeSpan _TimeSpent;
@@ -42,7 +43,8 @@ namespace BeatSaberTweaks
                 _TimeRot = Settings.TimeSpentClockRotation;
                 _TimeSize = Settings.TimeSpentClockFontSize;
                 _HideWhilePlaying = Settings.HideTimeSpentClockIngame;
-                _StartTime = DateTime.Now;
+                _MessageTemplate = Settings.TimeSpentClockMessageTemplate;
+                _StartTime = DateTime.Now;                
                 _IsPlayerIngame = false;
             }
             else
@@ -108,16 +110,18 @@ namespace BeatSaberTweaks
             while (_Text != null)
             {
                 _TimeSpent = DateTime.Now - _StartTime;
+                String timeDisplay;
                 if (_TimeSpent.Hours == 0)
                 {
                     if (_TimeSpent.Minutes == 0)
-                        _Text.text = "You've spent " + string.Format("{0:00}s", _TimeSpent.Seconds) + " in this session.";
+                        timeDisplay = string.Format("{0:00}s", _TimeSpent.Seconds);
                     else
-                        _Text.text = "You've spent " + string.Format("{0:00}m {1:00}s", _TimeSpent.Minutes, _TimeSpent.Seconds) + " in this session.";
+                        timeDisplay = string.Format("{0:00}m {1:00}s", _TimeSpent.Minutes, _TimeSpent.Seconds);
                 }
                 else
-                    _Text.text = "You've spent " + string.Format("{0:00}h {1:00}m {2:00}s", _TimeSpent.Hours, _TimeSpent.Minutes, _TimeSpent.Seconds) + " in this session.";
+                    timeDisplay = string.Format("{0:00}h {1:00}m {2:00}s", _TimeSpent.Hours, _TimeSpent.Minutes, _TimeSpent.Seconds);
 
+                _Text.text = _MessageTemplate.Replace("%TIME%", timeDisplay);
                 yield return new WaitForSeconds(1f);
             }
         }

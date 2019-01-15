@@ -56,6 +56,10 @@ namespace BeatSaberTweaks
         public static bool HideTimeSpentClockIngame { get => instance.hideTimeSpentClockIngame; set => instance.hideTimeSpentClockIngame = value; }
 
         [SerializeField]
+        String timeSpentClockMessageTemplate = "You've spent %TIME% in this session.";
+        public static String TimeSpentClockMessageTemplate { get => instance.timeSpentClockMessageTemplate; set => instance.timeSpentClockMessageTemplate = value; }
+
+        [SerializeField]
         float timeSpentClockFontSize = 4.0f;
         public static float TimeSpentClockFontSize { get => instance.timeSpentClockFontSize; set => instance.timeSpentClockFontSize = value; }
 
@@ -87,6 +91,10 @@ namespace BeatSaberTweaks
         [SerializeField]
         Vector3 ingameTimeSpentClockRotation = new Vector3(0, 0, 0);
         public static Quaternion IngameTimeSpentClockRotation { get => Quaternion.Euler(instance.ingameTimeSpentClockRotation); set => instance.ingameTimeSpentClockRotation = value.eulerAngles; }
+
+        [SerializeField]
+        String ingameTimeSpentClockMessageTemplate = "You've played %TIME% this session.";
+        public static String IngameTimeSpentClockMessageTemplate { get => instance.ingameTimeSpentClockMessageTemplate; set => instance.ingameTimeSpentClockMessageTemplate = value; }
 
         // Move Energy Bar
         [SerializeField]
