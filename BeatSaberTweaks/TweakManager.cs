@@ -19,7 +19,6 @@ namespace BeatSaberTweaks
     {
         public static TweakManager Instance = null;
         MainMenuViewController _mainMenuViewController = null;
-        SimpleDialogPromptViewController prompt = null;
 
         /*
          * TODO
@@ -53,6 +52,7 @@ namespace BeatSaberTweaks
                 MenuBGVolume.OnLoad(transform);
                 OneColour.OnLoad(transform);
                 SongDataModifer.OnLoad(transform);
+                MusicVolume.OnLoad(transform);
             }
             else
             {
@@ -198,6 +198,11 @@ namespace BeatSaberTweaks
             noteMiss.SetValue += delegate (float value) { Settings.NoteMissVolume = value; };
             noteMiss.FormatValue += delegate (float value) { return string.Format("{0:0.0}", value); };
 
+            var musicVol = subMenu1.AddList("Music Volume", volumeValues());
+            musicVol.GetValue += delegate { return Settings.MusicVolume; };
+            musicVol.SetValue += delegate (float value) { Settings.MusicVolume = value; };
+            musicVol.FormatValue += delegate (float value) { return string.Format("{0:0.0}", value); };
+
             var menuBG = subMenu1.AddList("Menu BG Music Volume", volumeValues());
             menuBG.GetValue += delegate { return Settings.MenuBGVolume; };
             menuBG.SetValue += delegate (float value) { Settings.MenuBGVolume = value; };
@@ -237,7 +242,7 @@ namespace BeatSaberTweaks
         {
             float startValue = 0.0f;
             float step = 0.1f;
-            var numberOfElements = 21;
+            var numberOfElements = 11;
             var values = new float[numberOfElements];
             for (int i = 0; i < values.Length; i++)
             {

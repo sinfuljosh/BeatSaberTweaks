@@ -90,8 +90,8 @@ namespace BeatSaberTweaks
                         normalVolume = ReflectionUtil.GetPrivateField<float>(effect, goodCutString);
                         normalMissVolume = ReflectionUtil.GetPrivateField<float>(effect, badCutString);
 
-                        Console.WriteLine("Normal hit volumes =" + normalVolume);
-                        Console.WriteLine("Normal miss volumes =" + normalMissVolume);
+                        Plugin.Log("Normal hit volumes =" + normalVolume, Plugin.LogLevel.DebugOnly);
+                        Plugin.Log("Normal miss volumes =" + normalMissVolume, Plugin.LogLevel.DebugOnly);
                     }
                     ReflectionUtil.SetPrivateField(effect, goodCutString, normalVolume * Settings.NoteHitVolume);
                     ReflectionUtil.SetPrivateField(effect, badCutString, normalMissVolume * Settings.NoteMissVolume);

@@ -22,6 +22,10 @@ namespace BeatSaberTweaks
         public static float NoteMissVolume { get => instance.noteMissVolume; set => instance.noteMissVolume = value; }
 
         [SerializeField]
+        float musicVolume = 1.0f;
+        public static float MusicVolume { get => instance.musicVolume; set => instance.musicVolume = value; }
+
+        [SerializeField]
         float menuBGVolume = 1.0f;
         public static float MenuBGVolume { get => instance.menuBGVolume; set => instance.menuBGVolume = value; }
 

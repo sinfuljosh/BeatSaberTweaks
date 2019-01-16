@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tweaks\IngameTimeSpentClock.cs" />
+    <Compile Include="Tweaks\MusicVolume.cs" />
     <Compile Include="Tweaks\OneColour.cs" />
     <Compile Include="Tweaks\SongDataModifer.cs" />
     <Compile Include="Tweaks\MenuBGVolume.cs" />
