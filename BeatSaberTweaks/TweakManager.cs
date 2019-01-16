@@ -178,6 +178,11 @@ namespace BeatSaberTweaks
             showClock.GetValue += delegate { return Settings.ShowClock; };
             showClock.SetValue += delegate (bool value) { Settings.ShowClock = value; };
 
+            var hideClockIngame = subMenu2.AddBool("Hide Clock While Playing");
+            hideClockIngame.GetValue += delegate { return Settings.HideClockIngame; };
+            hideClockIngame.SetValue += delegate (bool value) { Settings.HideClockIngame = value; };
+
+
             var clock24hr = subMenu2.AddBool("24hr Clock");
             clock24hr.GetValue += delegate { return Settings.Use24hrClock; };
             clock24hr.SetValue += delegate (bool value)

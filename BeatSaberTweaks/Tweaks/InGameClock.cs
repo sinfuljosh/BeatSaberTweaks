@@ -22,6 +22,8 @@ namespace BeatSaberTweaks
         private static Quaternion timeRot;
         private static float timeSize;
 
+        private bool _IsPlayerIngame;
+
         float timer = 0;
 
         public static void OnLoad(Transform parent)
@@ -74,14 +76,15 @@ namespace BeatSaberTweaks
 
                     text = textGO.AddComponent<TextMeshProUGUI>();
                     text.name = "Clock Text";
-                    text.alignment = TextAlignmentOptions.Center;
+                    text.alignment = TextAlignmentOptions.Left;
                     text.fontSize = timeSize;
                     text.text = "";
 
                     UpdateClock();
-
+                    
                     ClockCanvas.SetActive(Settings.ShowClock);
                 }
+                _IsPlayerIngame = SceneUtils.isGameScene(scene);
             }
             catch (Exception e)
             {
@@ -91,9 +94,10 @@ namespace BeatSaberTweaks
 
         public void Update()
         {
-            if (ClockCanvas != null && Settings.ShowClock != ClockCanvas.activeSelf)
+            bool shouldShow = Settings.ShowClock && (!_IsPlayerIngame || !Settings.HideClockIngame);
+            if (ClockCanvas != null && shouldShow != ClockCanvas.activeSelf)
             {
-                ClockCanvas.SetActive(Settings.ShowClock);
+                ClockCanvas.SetActive(shouldShow);
             }
 
             timer += Time.deltaTime;

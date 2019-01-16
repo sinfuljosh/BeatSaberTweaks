@@ -44,6 +44,10 @@ namespace BeatSaberTweaks
         public static bool ShowClock { get => instance.showclock; set => instance.showclock = value; }
 
         [SerializeField]
+        bool hideClockIngame = false;
+        public static bool HideClockIngame { get => instance.hideClockIngame; set => instance.hideClockIngame = value; }
+
+        [SerializeField]
         bool use24hrClock = false;
         public static bool Use24hrClock { get => instance.use24hrClock; set => instance.use24hrClock = value; }
 
