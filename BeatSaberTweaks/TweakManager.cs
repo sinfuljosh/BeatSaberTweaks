@@ -237,7 +237,7 @@ namespace BeatSaberTweaks
         {
             float startValue = 0.0f;
             float step = 0.1f;
-            var numberOfElements = 11;
+            var numberOfElements = 21;
             var values = new float[numberOfElements];
             for (int i = 0; i < values.Length; i++)
             {
