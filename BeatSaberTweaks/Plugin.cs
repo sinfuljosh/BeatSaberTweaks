@@ -7,8 +7,10 @@ namespace BeatSaberTweaks
 {
     public class Plugin : IPlugin
     {
+        public static string versionNumber = "4.2.0";
+
         public string Name => "Beat Saber Tweaks";
-        public string Version => "4.2.0";
+        public string Version => versionNumber;
 
         private bool _init = false;
         private BeatmapCharacteristicSelectionViewController _characteristicViewController;
