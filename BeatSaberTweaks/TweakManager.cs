@@ -251,7 +251,7 @@ namespace BeatSaberTweaks
                 return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var menuBG = subMenu1.AddList("Menu BG Music Volume", incrementValues(), "The volume for the menu background music. Default value is underlined.");
+            var menuBG = subMenu1.AddList("Menu BG Music Volume", incrementValues(), "The volume for the menu background music.");
             menuBG.GetValue += delegate { return Settings.MenuBGVolume; };
             menuBG.SetValue += delegate (float value) { Settings.MenuBGVolume = value; };
             menuBG.FormatValue += delegate (float value) {
@@ -289,7 +289,7 @@ namespace BeatSaberTweaks
             //}
         }
 
-        private float[] incrementValues(float startValue = 0.0f, float step = 0.1f, int numberOfElements = 11)
+        private float[] incrementValues(float startValue = 0.0f, float step = 0.05f, int numberOfElements = 21)
         {
             if (step < 0.01f)
             {
