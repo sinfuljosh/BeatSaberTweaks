@@ -8,14 +8,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
+using System.Collections;
 
 namespace BeatSaberTweaks
 {
     class MenuBGVolume : MonoBehaviour
     {
         public static MenuBGVolume Instance;
-
-        static float normalVolume = 0;
+        
         static SongPreviewPlayer player = null;
 
         public static void OnLoad(Transform parent)
@@ -38,6 +38,42 @@ namespace BeatSaberTweaks
             }
         }
 
+        private void SceneManagerOnActiveSceneChanged(Scene arg0, Scene scene)
+        {
+            try
+            {
+                if (SceneUtils.isMenuScene(scene))
+                {
+                    StartCoroutine(WaitForLoad());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Tweaks Music Volume error: " + e);
+            }
+        }
+
+        private IEnumerator WaitForLoad()
+        {
+            bool loaded = false;
+            while (!loaded)
+            {
+                player = Resources.FindObjectsOfTypeAll<SongPreviewPlayer>().FirstOrDefault();
+
+                if (player == null)
+                {
+                    Plugin.Log("Music Volume player is null!", Plugin.LogLevel.DebugOnly);
+                    yield return new WaitForSeconds(0.01f);
+                }
+                else
+                {
+                    Plugin.Log("Music Volume found player!", Plugin.LogLevel.DebugOnly);
+                    loaded = true;
+                }
+            }
+            UpdateBGVolume();
+        }
+
         public static void UpdateBGVolume()
         {
             Plugin.Log("Updating BG volume", Plugin.LogLevel.DebugOnly);
@@ -46,27 +82,6 @@ namespace BeatSaberTweaks
                 float newVolume = Settings.MenuBGVolume;
                 ReflectionUtil.SetPrivateField(player, "_ambientVolumeScale", newVolume);
                 player.CrossfadeTo(ReflectionUtil.GetPrivateField<AudioClip>(player, "_defaultAudioClip"), 0f, -1f, newVolume);
-            }
-        }
-
-        private void SceneManagerOnActiveSceneChanged(Scene arg0, Scene scene)
-        {
-            Plugin.Log("MenuBGVolume SceneManagerOnActiveSceneChanged", Plugin.LogLevel.DebugOnly);
-            try
-            {
-                if (SceneUtils.isMenuScene(scene))
-                {
-                    player = Resources.FindObjectsOfTypeAll<SongPreviewPlayer>().FirstOrDefault();
-                    UpdateBGVolume();
-                }
-                else
-                {
-                    player = null;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Tweaks (MenuMusic) done fucked up: " + e);
             }
         }
     }
