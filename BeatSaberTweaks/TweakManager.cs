@@ -188,36 +188,36 @@ namespace BeatSaberTweaks
 
             var subMenu1 = SettingsUI.CreateSubMenu("Volume Tweaks");
 
-            var noteHit = subMenu1.AddList("Note Hit Volume", volumeValues());
+            var noteHit = subMenu1.AddList("Note Hit Volume", volumeValues(), "The volume for the note cut sound effect. Default value is underlined.");
             noteHit.GetValue += delegate { return Settings.NoteHitVolume; };
             noteHit.SetValue += delegate (float value) { Settings.NoteHitVolume = value; };
             noteHit.FormatValue += delegate (float value) {
-                if (value == 0.5f) return string.Format("<u>{0:0.0}</u>", value);
-                return string.Format("{0:0.0}", value);
+                if (value == 0.5f) return string.Format("<u>{0}%</u>", Mathf.Floor(value * 100));
+                return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var noteMiss = subMenu1.AddList("Note Miss Volume", volumeValues());
+            var noteMiss = subMenu1.AddList("Note Miss Volume", volumeValues(), "The volume of the miss / bad cut sound effect. Default value is underlined.");
             noteMiss.GetValue += delegate { return Settings.NoteMissVolume; };
             noteMiss.SetValue += delegate (float value) { Settings.NoteMissVolume = value; };
             noteMiss.FormatValue += delegate (float value) {
-                if (value < 0.91f && value > 0.89f) return string.Format("<u>{0:0.0}</u>", value);
-                return string.Format("{0:0.0}", value);
+                if (value < 0.91f && value > 0.89f) return string.Format("<u>{0}%</u>", Mathf.Floor(value * 100));
+                return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var musicVol = subMenu1.AddList("Music Volume", volumeValues());
+            var musicVol = subMenu1.AddList("Music Volume", volumeValues(), "The volume of the beatmap's song. Default value is underlined.");
             musicVol.GetValue += delegate { return Settings.MusicVolume; };
             musicVol.SetValue += delegate (float value) { Settings.MusicVolume = value; };
             musicVol.FormatValue += delegate (float value) {
-                if (value == 1f) return string.Format("<u>{0:0.0}</u>", value);
-                return string.Format("{0:0.0}", value);
+                if (value == 1f) return string.Format("<u>{0}%</u>", Mathf.Floor(value * 100));
+                return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var menuBG = subMenu1.AddList("Menu BG Music Volume", volumeValues());
+            var menuBG = subMenu1.AddList("Menu BG Music Volume", volumeValues(), "The volume for the menu background music. Default value is underlined.");
             menuBG.GetValue += delegate { return Settings.MenuBGVolume; };
             menuBG.SetValue += delegate (float value) { Settings.MenuBGVolume = value; };
             menuBG.FormatValue += delegate (float value) {
-                if (value == 1f) return string.Format("<u>{0:0.0}</u>", value);
-                return string.Format("{0:0.0}", value);
+                if (value == 1f) return string.Format("<u>{0}%</u>", Mathf.Floor(value * 100));
+                return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
             var subMenu4 = SettingsUI.CreateSubMenu("Party Mode Tweaks");
@@ -253,8 +253,8 @@ namespace BeatSaberTweaks
         private float[] volumeValues()
         {
             float startValue = 0.0f;
-            float step = 0.1f;
-            var numberOfElements = 11;
+            float step = 0.05f;
+            var numberOfElements = 21;
             var values = new float[numberOfElements];
             for (int i = 0; i < values.Length; i++)
             {
