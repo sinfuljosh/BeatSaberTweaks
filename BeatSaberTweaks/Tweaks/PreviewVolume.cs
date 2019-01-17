@@ -45,6 +45,7 @@ namespace BeatSaberTweaks
             {
                 float newVolume = Settings.PreviewVolume;
                 songPreviewPlayer.volume = newVolume;
+                ReflectionUtil.SetPrivateField(songPreviewPlayer, "_ambientVolumeScale", Settings.PreviewVolume);
                 Plugin.Log("Setting preview volume to " + newVolume, Plugin.LogLevel.DebugOnly);
             }
         }
