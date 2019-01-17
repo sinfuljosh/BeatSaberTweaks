@@ -219,7 +219,7 @@ namespace BeatSaberTweaks
                 Console.WriteLine("Error trying to add comment to volume tweaks settings page:" + e);
             }
 
-            var noteHit = subMenu1.AddList("Note Hit Volume", volumeValues(), "The volume for the note cut sound effect. Default value is underlined.");
+            var noteHit = subMenu1.AddList("Note Hit Volume", incrementValues(), "The volume for the note cut sound effect.");
             noteHit.GetValue += delegate { return Settings.NoteHitVolume; };
             noteHit.SetValue += delegate (float value) { Settings.NoteHitVolume = value; };
             noteHit.FormatValue += delegate (float value) {
@@ -227,7 +227,7 @@ namespace BeatSaberTweaks
                 return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var noteMiss = subMenu1.AddList("Note Miss Volume", volumeValues(), "The volume of the miss / bad cut sound effect. Default value is underlined.");
+            var noteMiss = subMenu1.AddList("Note Miss Volume", incrementValues(), "The volume of the miss / bad cut sound effect.");
             noteMiss.GetValue += delegate { return Settings.NoteMissVolume; };
             noteMiss.SetValue += delegate (float value) { Settings.NoteMissVolume = value; };
             noteMiss.FormatValue += delegate (float value) {
@@ -235,7 +235,7 @@ namespace BeatSaberTweaks
                 return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var musicVol = subMenu1.AddList("Music Volume", volumeValues(), "The volume of the song you play. Default value is underlined.");
+            var musicVol = subMenu1.AddList("Music Volume", incrementValues(), "The volume of the song you play.");
             musicVol.GetValue += delegate { return Settings.MusicVolume; };
             musicVol.SetValue += delegate (float value) { Settings.MusicVolume = value; };
             musicVol.FormatValue += delegate (float value) {
@@ -243,7 +243,7 @@ namespace BeatSaberTweaks
                 return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var previewVol = subMenu1.AddList("Preview Volume", volumeValues(), "The volume of the beatmap preview in the songs list. Default value is underlined.");
+            var previewVol = subMenu1.AddList("Preview Volume", incrementValues(), "The volume of the beatmap preview in the songs list.");
             previewVol.GetValue += delegate { return Settings.PreviewVolume; };
             previewVol.SetValue += delegate (float value) { Settings.PreviewVolume = value; };
             previewVol.FormatValue += delegate (float value) {
@@ -251,7 +251,7 @@ namespace BeatSaberTweaks
                 return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var menuBG = subMenu1.AddList("Menu BG Music Volume", volumeValues(), "The volume for the menu background music. Default value is underlined.");
+            var menuBG = subMenu1.AddList("Menu BG Music Volume", incrementValues(), "The volume for the menu background music. Default value is underlined.");
             menuBG.GetValue += delegate { return Settings.MenuBGVolume; };
             menuBG.SetValue += delegate (float value) { Settings.MenuBGVolume = value; };
             menuBG.FormatValue += delegate (float value) {
@@ -289,16 +289,19 @@ namespace BeatSaberTweaks
             //}
         }
 
-        private float[] volumeValues()
+        private float[] incrementValues(float startValue = 0.0f, float step = 0.1f, int numberOfElements = 11)
         {
-            float startValue = 0.0f;
-            float step = 0.05f;
-            var numberOfElements = 21;
+            if (step < 0.01f)
+            {
+                throw new Exception("Step value specified was too small! Minimum supported step value is 0.01");
+            }
+            Int64 multiplier = 100;
+            // Avoid floating point math as it results in rounding errors
+            Int64 fixedStart = (Int64)(startValue * multiplier);
+            Int64 fixedStep = (Int64)(step * multiplier);
             var values = new float[numberOfElements];
             for (int i = 0; i < values.Length; i++)
-            {
-                values[i] = startValue + step * i;
-            }
+                values[i] = (float)(fixedStart + (fixedStep * i)) / multiplier;
             return values;
         }
 
