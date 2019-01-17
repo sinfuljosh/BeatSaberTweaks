@@ -191,22 +191,34 @@ namespace BeatSaberTweaks
             var noteHit = subMenu1.AddList("Note Hit Volume", volumeValues());
             noteHit.GetValue += delegate { return Settings.NoteHitVolume; };
             noteHit.SetValue += delegate (float value) { Settings.NoteHitVolume = value; };
-            noteHit.FormatValue += delegate (float value) { return string.Format("{0:0.0}", value); };
+            noteHit.FormatValue += delegate (float value) {
+                if (value == 0.5f) return string.Format("<u>{0:0.0}</u>", value);
+                return string.Format("{0:0.0}", value);
+            };
 
             var noteMiss = subMenu1.AddList("Note Miss Volume", volumeValues());
             noteMiss.GetValue += delegate { return Settings.NoteMissVolume; };
             noteMiss.SetValue += delegate (float value) { Settings.NoteMissVolume = value; };
-            noteMiss.FormatValue += delegate (float value) { return string.Format("{0:0.0}", value); };
+            noteMiss.FormatValue += delegate (float value) {
+                if (value < 0.91f && value > 0.89f) return string.Format("<u>{0:0.0}</u>", value);
+                return string.Format("{0:0.0}", value);
+            };
 
             var musicVol = subMenu1.AddList("Music Volume", volumeValues());
             musicVol.GetValue += delegate { return Settings.MusicVolume; };
             musicVol.SetValue += delegate (float value) { Settings.MusicVolume = value; };
-            musicVol.FormatValue += delegate (float value) { return string.Format("{0:0.0}", value); };
+            musicVol.FormatValue += delegate (float value) {
+                if (value == 1f) return string.Format("<u>{0:0.0}</u>", value);
+                return string.Format("{0:0.0}", value);
+            };
 
             var menuBG = subMenu1.AddList("Menu BG Music Volume", volumeValues());
             menuBG.GetValue += delegate { return Settings.MenuBGVolume; };
             menuBG.SetValue += delegate (float value) { Settings.MenuBGVolume = value; };
-            menuBG.FormatValue += delegate (float value) { return string.Format("{0:0.0}", value); };
+            menuBG.FormatValue += delegate (float value) {
+                if (value == 1f) return string.Format("<u>{0:0.0}</u>", value);
+                return string.Format("{0:0.0}", value);
+            };
 
             var subMenu4 = SettingsUI.CreateSubMenu("Party Mode Tweaks");
 
