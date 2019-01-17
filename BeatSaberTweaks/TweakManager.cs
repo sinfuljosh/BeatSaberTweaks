@@ -53,6 +53,7 @@ namespace BeatSaberTweaks
                 OneColour.OnLoad(transform);
                 SongDataModifer.OnLoad(transform);
                 MusicVolume.OnLoad(transform);
+                PreviewVolume.OnLoad(transform);
             }
             else
             {
@@ -204,10 +205,18 @@ namespace BeatSaberTweaks
                 return string.Format("{0}%", Mathf.Floor(value * 100));
             };
 
-            var musicVol = subMenu1.AddList("Music Volume", volumeValues(), "The volume of the beatmap's song. Default value is underlined.");
+            var musicVol = subMenu1.AddList("Music Volume", volumeValues(), "The volume of the song you play. Default value is underlined.");
             musicVol.GetValue += delegate { return Settings.MusicVolume; };
             musicVol.SetValue += delegate (float value) { Settings.MusicVolume = value; };
             musicVol.FormatValue += delegate (float value) {
+                if (value == 1f) return string.Format("<u>{0}%</u>", Mathf.Floor(value * 100));
+                return string.Format("{0}%", Mathf.Floor(value * 100));
+            };
+
+            var previewVol = subMenu1.AddList("Preview Volume", volumeValues(), "The volume of the beatmap preview in the songs list. Default value is underlined.");
+            previewVol.GetValue += delegate { return Settings.PreviewVolume; };
+            previewVol.SetValue += delegate (float value) { Settings.PreviewVolume = value; };
+            previewVol.FormatValue += delegate (float value) {
                 if (value == 1f) return string.Format("<u>{0}%</u>", Mathf.Floor(value * 100));
                 return string.Format("{0}%", Mathf.Floor(value * 100));
             };
