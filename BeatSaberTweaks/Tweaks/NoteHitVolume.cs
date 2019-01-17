@@ -85,6 +85,7 @@ namespace BeatSaberTweaks
                 var pool = Resources.FindObjectsOfTypeAll<NoteCutSoundEffect>();
                 foreach (var effect in pool)
                 {
+                    /*
                     if (normalVolume == 0)
                     {
                         normalVolume = ReflectionUtil.GetPrivateField<float>(effect, goodCutString);
@@ -93,8 +94,9 @@ namespace BeatSaberTweaks
                         Plugin.Log("Normal hit volumes =" + normalVolume, Plugin.LogLevel.DebugOnly);
                         Plugin.Log("Normal miss volumes =" + normalMissVolume, Plugin.LogLevel.DebugOnly);
                     }
-                    ReflectionUtil.SetPrivateField(effect, goodCutString, normalVolume * Settings.NoteHitVolume);
-                    ReflectionUtil.SetPrivateField(effect, badCutString, normalMissVolume * Settings.NoteMissVolume);
+                    */
+                    ReflectionUtil.SetPrivateField(effect, goodCutString, Settings.NoteHitVolume);
+                    ReflectionUtil.SetPrivateField(effect, badCutString, Settings.NoteMissVolume);
                 }
             }
             catch (Exception e)

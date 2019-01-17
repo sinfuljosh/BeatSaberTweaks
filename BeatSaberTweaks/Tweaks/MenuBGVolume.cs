@@ -43,10 +43,9 @@ namespace BeatSaberTweaks
             Plugin.Log("Updating BG volume", Plugin.LogLevel.DebugOnly);
             if (player != null && SceneUtils.isMenuScene(SceneManager.GetActiveScene()))
             {
-                float newVolume = normalVolume * Settings.MenuBGVolume;
+                float newVolume = Settings.MenuBGVolume;
                 ReflectionUtil.SetPrivateField(player, "_ambientVolumeScale", newVolume);
                 player.CrossfadeTo(ReflectionUtil.GetPrivateField<AudioClip>(player, "_defaultAudioClip"), 0f, -1f, newVolume);
-                //player.CrossfadeToDefault();
             }
         }
 
@@ -58,10 +57,6 @@ namespace BeatSaberTweaks
                 if (SceneUtils.isMenuScene(scene))
                 {
                     player = Resources.FindObjectsOfTypeAll<SongPreviewPlayer>().FirstOrDefault();
-                    if (normalVolume == 0)
-                    {
-                        normalVolume = ReflectionUtil.GetPrivateField<float>(player, "_ambientVolumeScale");
-                    }
                     UpdateBGVolume();
                 }
                 else

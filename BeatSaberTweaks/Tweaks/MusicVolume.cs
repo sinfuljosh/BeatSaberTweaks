@@ -19,7 +19,6 @@ namespace BeatSaberTweaks
         static GameSongController songController = null;
         static AudioTimeSyncController audioTimeSyncController = null;
         static AudioSource audioSource = null;
-        static float normalVolume = 0f;
 
         public static void OnLoad(Transform parent)
         {
@@ -100,7 +99,6 @@ namespace BeatSaberTweaks
                     audioSource = ReflectionUtil.GetPrivateField<AudioSource>(audioTimeSyncController, "_audioSource");
                     try
                     {
-                        normalVolume = audioSource.volume;
                         UpdateMusicVolume();
                     }
                     catch (Exception e)
