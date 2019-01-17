@@ -49,6 +49,8 @@ namespace BeatSaberTweaks
                 float newVolume = Settings.MusicVolume;
                 audioSource.volume = newVolume;
                 Plugin.Log("Setting music volume to " + newVolume, Plugin.LogLevel.DebugOnly);
+
+                TweakManager.PatchWithHarmony();
             }
         }
 

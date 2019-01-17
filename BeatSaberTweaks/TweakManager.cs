@@ -13,6 +13,7 @@ using IllusionPlugin;
 using CustomUI.BeatSaber;
 using CustomUI.Settings;
 using System.Reflection;
+using Harmony;
 
 namespace BeatSaberTweaks
 {
@@ -20,6 +21,7 @@ namespace BeatSaberTweaks
     {
         public static TweakManager Instance = null;
         MainMenuViewController _mainMenuViewController = null;
+        private static HarmonyInstance harmony = null;
 
         /*
          * TODO
@@ -31,6 +33,7 @@ namespace BeatSaberTweaks
         {
             if (Instance != null) return;
             new GameObject("Tweak Manager").AddComponent<TweakManager>();
+            harmony = HarmonyInstance.Create("com.megalon.BeatSaber.BeatSaberTweaks");
         }
 
         public void Awake()
@@ -112,6 +115,21 @@ namespace BeatSaberTweaks
         }
         */
 
+        public static void PatchWithHarmony()
+        {
+            try
+            {
+                Plugin.Log("Applying harmony patch...", Plugin.LogLevel.DebugOnly);
+                harmony.PatchAll(Assembly.GetExecutingAssembly());
+                Plugin.Log("Harmony patch applied!", Plugin.LogLevel.DebugOnly);
+            }
+            catch (Exception e)
+            {
+                Plugin.Log("This plugin requires Harmony. Run the Mod Manager and install the Harmony library", Plugin.LogLevel.Error);
+                Plugin.Log(e.ToString(), Plugin.LogLevel.Error);
+            }
+        }
+
         public static bool IsPartyMode()
         {
             Plugin.Log(Plugin.party.ToString(), Plugin.LogLevel.Info);
@@ -119,8 +137,6 @@ namespace BeatSaberTweaks
                 return true;
             else
                 return false;
-
-
         }
 
         public void SceneManagerOnActiveSceneChanged(Scene arg0, Scene scene)
