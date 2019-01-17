@@ -12,7 +12,12 @@ namespace BeatSaberTweaks
     {
         static Settings instance = null;
 
-        // Note Hit/Miss and Menu BG Volume
+        // Settings version
+        [SerializeField]
+        string settingsVersion = "0.0.0";
+        public static string SettingsVersion { get => instance.settingsVersion; set => instance.settingsVersion = value; }
+
+        // Note Volume controls
         [SerializeField]
         float noteHitVolume = 1.0f;
         public static float NoteHitVolume { get => instance.noteHitVolume; set => instance.noteHitVolume = value; }
@@ -153,11 +158,20 @@ namespace BeatSaberTweaks
             {
                 string dataAsJson = File.ReadAllText(filePath);
                 JsonUtility.FromJsonOverwrite(dataAsJson, instance);
+
+                if (instance.settingsVersion.Equals("0.0.0"))
+                {
+                    Plugin.Log("Settings didn't contain version number! Converting old settings to new format!", Plugin.LogLevel.Error);
+                    instance.noteHitVolume = instance.noteHitVolume * 0.5f;
+                    instance.noteMissVolume = instance.noteMissVolume * 0.9f;
+                    Plugin.Log("Settings conversion finished!", Plugin.LogLevel.Error);
+                }
             }
         }
 
         public static void Save()
         {
+            instance.settingsVersion = Plugin.versionNumber;
             string dataAsJson = JsonUtility.ToJson(instance, true);
             File.WriteAllText(SettingsPath(), dataAsJson);
         }
