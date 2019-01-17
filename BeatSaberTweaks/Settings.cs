@@ -158,14 +158,22 @@ namespace BeatSaberTweaks
 
         public static string SettingsPath()
         {
-            return Path.Combine(Environment.CurrentDirectory, "Tweaks.cfg");
+            return Path.Combine(Environment.CurrentDirectory, "UserData/Tweaks.cfg");
         }
 
         public static void Load()
         {
             instance = new Settings();
 
+            string oldFilePath = Path.Combine(Environment.CurrentDirectory, "Tweaks.cfg");
             string filePath = SettingsPath();
+            
+            // If the file exists in the old location, but not in the new one, move it to the new location
+            if (File.Exists(oldFilePath) && !File.Exists(filePath))
+            {
+                File.Move(oldFilePath, filePath);
+            }
+
             if (File.Exists(filePath))
             {
                 string dataAsJson = File.ReadAllText(filePath);
