@@ -71,14 +71,14 @@ namespace BeatSaberTweaks
         public void Update()
         {
             /*
-             * TODO
-             * This is to enable the flying cars easteregg.
-             * Is this even still in the game?
+                * TODO
+                * This is to enable the flying cars easteregg.
+                * Is this even still in the game?
             if (SettingsUI.isMenuScene(SceneManager.GetActiveScene()))
             {
                 if (_mainMenuViewController.childViewController == null &&
-                   (Input.GetAxis("TriggerLeftHand") > 0.75f) &&
-                   (Input.GetAxis("TriggerRightHand") > 0.75f))
+                    (Input.GetAxis("TriggerLeftHand") > 0.75f) &&
+                    (Input.GetAxis("TriggerRightHand") > 0.75f))
                 {
                     carTime += Time.deltaTime;
                     if (carTime > 5.0f)
@@ -95,24 +95,24 @@ namespace BeatSaberTweaks
                 }
             }
             */
-    }
-
-    /*
-     * TODO
-     * More flyingcars stuff
-    private void CarEvent(SimpleDialogPromptViewController viewController, bool ok)
-    {
-        viewController.didFinishEvent -= CarEvent;
-        if (viewController.isRebuildingHierarchy)
-        {
-            return;
         }
-        FlyingCar.startflyingCars = ok;
-        viewController.DismissModalViewController(null, false);
-    }
-    */
 
-    public static bool IsPartyMode()
+        /*
+         * TODO
+         * More flyingcars stuff
+        private void CarEvent(SimpleDialogPromptViewController viewController, bool ok)
+        {
+            viewController.didFinishEvent -= CarEvent;
+            if (viewController.isRebuildingHierarchy)
+            {
+                return;
+            }
+            FlyingCar.startflyingCars = ok;
+            viewController.DismissModalViewController(null, false);
+        }
+        */
+
+        public static bool IsPartyMode()
         {
             Plugin.Log(Plugin.party.ToString(), Plugin.LogLevel.Info);
             if (Plugin.party)
