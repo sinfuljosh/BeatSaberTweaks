@@ -12,6 +12,7 @@ using TMPro;
 using IllusionPlugin;
 using CustomUI.BeatSaber;
 using CustomUI.Settings;
+using System.Reflection;
 
 namespace BeatSaberTweaks
 {
@@ -188,6 +189,35 @@ namespace BeatSaberTweaks
             hideIngameTimeSpentClockIngame.SetValue += delegate (bool value) { Settings.HideIngameTimeSpentClockIngame = value; };
 
             var subMenu1 = SettingsUI.CreateSubMenu("Volume Tweaks");
+            
+            var volumeComment = subMenu1.AddBool("<align=\"center\"><b>The default value is <u>underlined</u>!</b></align>");
+            volumeComment.GetValue += delegate { return false; };
+            volumeComment.SetValue += delegate (bool value) {  };
+
+            // Hack to convert the boolean toggle into a text only comment
+            // This disables the arrows and the value display
+            try
+            {
+                // Note:
+                // To get objects from inherited class through reflection, use object.GetType().BaseType
+                // Here I do it twice to go up two levels in the heiarchy
+                var buttonToDisable = volumeComment.GetType().BaseType.BaseType.GetField("_decButton", BindingFlags.NonPublic | BindingFlags.Instance);
+                var decButton = (MonoBehaviour)buttonToDisable.GetValue(volumeComment);
+                buttonToDisable = volumeComment.GetType().BaseType.BaseType.GetField("_incButton", BindingFlags.NonPublic | BindingFlags.Instance);
+                var incButton = (MonoBehaviour)buttonToDisable.GetValue(volumeComment);
+
+                decButton.gameObject.SetActive(false);
+                incButton.gameObject.SetActive(false);
+
+                var textToDisable = volumeComment.GetType().BaseType.BaseType.GetField("_text", BindingFlags.NonPublic | BindingFlags.Instance);
+                var uselessText = (MonoBehaviour)textToDisable.GetValue(volumeComment);
+
+                uselessText.gameObject.SetActive(false);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error trying to add comment to volume tweaks settings page:" + e);
+            }
 
             var noteHit = subMenu1.AddList("Note Hit Volume", volumeValues(), "The volume for the note cut sound effect. Default value is underlined.");
             noteHit.GetValue += delegate { return Settings.NoteHitVolume; };
