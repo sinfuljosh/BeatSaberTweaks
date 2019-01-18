@@ -45,7 +45,9 @@ namespace BeatSaberTweaks
             {
                 float newVolume = Settings.PreviewVolume;
                 songPreviewPlayer.volume = newVolume;
-                ReflectionUtil.SetPrivateField(songPreviewPlayer, "_ambientVolumeScale", Settings.PreviewVolume);
+            
+                // While this is the corssade source, this is also the menu background music volume!
+                //ReflectionUtil.SetPrivateField(songPreviewPlayer, "_ambientVolumeScale", Settings.PreviewVolume);
                 Plugin.Log("Setting preview volume to " + newVolume, Plugin.LogLevel.DebugOnly);
             }
         }
