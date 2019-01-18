@@ -7,7 +7,7 @@ namespace BeatSaberTweaks
 {
     public class Plugin : IPlugin
     {
-        public static string versionNumber = "4.2.2";
+        public static string versionNumber = "4.2.3";
 
         public string Name => "Beat Saber Tweaks";
         public string Version => versionNumber;
