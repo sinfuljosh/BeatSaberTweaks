@@ -34,6 +34,8 @@ namespace BeatSaberTweaks
             if (Instance != null) return;
             new GameObject("Tweak Manager").AddComponent<TweakManager>();
             harmony = HarmonyInstance.Create("com.megalon.BeatSaber.BeatSaberTweaks");
+            
+            PatchWithHarmony();
         }
 
         public void Awake()
@@ -53,11 +55,9 @@ namespace BeatSaberTweaks
                 TimeSpentClock.OnLoad(transform);
                 IngameTimeSpentClock.OnLoad(transform);
                 NoteHitVolume.OnLoad(transform);
-                MenuBGVolume.OnLoad(transform);
                 OneColour.OnLoad(transform);
                 SongDataModifer.OnLoad(transform);
                 MusicVolume.OnLoad(transform);
-                PreviewVolume.OnLoad(transform);
             }
             else
             {
