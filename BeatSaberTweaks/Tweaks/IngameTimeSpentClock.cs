@@ -75,7 +75,7 @@ namespace BeatSaberTweaks
 
                     _Text = textGO.AddComponent<TextMeshProUGUI>();
                     _Text.name = "IngameTimeSpentClock Text";
-                    _Text.alignment = Utilites.TextAlignUtil.textAlignFromString(Settings.ClockAlignment);
+                    _Text.alignment = Utilites.TextAlignUtil.textAlignFromString(Settings.IngameTimeSpentClockAlignment);
                     _Text.fontSize = _TimeSize;
                     _Text.text = _MessageTemplate.Replace("%TIME%", "0s");
 

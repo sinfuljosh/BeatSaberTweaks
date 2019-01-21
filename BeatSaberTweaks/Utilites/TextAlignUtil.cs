@@ -11,10 +11,10 @@ namespace BeatSaberTweaks.Utilites
     {
         public static TextAlignmentOptions textAlignFromString(String opt)
         {
-            if (String.Equals(Settings.ClockAlignment, "left", StringComparison.OrdinalIgnoreCase)) {
+            if (String.Equals(opt, "left", StringComparison.OrdinalIgnoreCase)) {
                 return TextAlignmentOptions.Left;
             }
-            else if (String.Equals(Settings.ClockAlignment, "right", StringComparison.OrdinalIgnoreCase)) {
+            else if (String.Equals(opt, "right", StringComparison.OrdinalIgnoreCase)) {
                 return TextAlignmentOptions.Right;
             }
             else {
