@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeatSaberTweaks.Tweaks.HarmonyPatches
+namespace BeatSaberTweaks.HarmonyPatches
 {
     [HarmonyPatch(typeof(AudioPitchGainEffect))]
     [HarmonyPatch("StartEffect")]

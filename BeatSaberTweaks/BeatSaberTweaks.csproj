@@ -88,12 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HarmonyPatches\AudioPitchGainEffectStartEffect.cs" />
+    <Compile Include="HarmonyPatches\SongPreviewPlayerCrossfadeTo.cs" />
     <Compile Include="Tweaks\IngameTimeSpentClock.cs" />
     <Compile Include="Tweaks\MusicVolume.cs" />
     <Compile Include="Tweaks\OneColour.cs" />
-    <Compile Include="Tweaks\PreviewVolume.cs" />
     <Compile Include="Tweaks\SongDataModifer.cs" />
-    <Compile Include="Tweaks\MenuBGVolume.cs" />
     <Compile Include="Tweaks\ScoreMover.cs" />
     <Compile Include="Tweaks\TimeSpentClock.cs" />
     <Compile Include="Utilites\ConInput.cs" />
@@ -102,6 +101,7 @@
     <Compile Include="Utilites\SceneLoadHandler.cs" />
     <Compile Include="Utilites\SceneUtils.cs" />
     <Compile Include="Utilites\TableViewHelper.cs" />
+    <Compile Include="Utilites\TextAlignUtil.cs" />
     <Compile Include="ViewControllers\HiddenNotesSettingsController.cs" />
     <Compile Include="Tweaks\InGameClock.cs" />
     <Compile Include="Tweaks\MoveEnergyBar.cs" />

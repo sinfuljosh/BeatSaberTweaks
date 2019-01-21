@@ -122,7 +122,7 @@ namespace BeatSaberTweaks
 
         public static void Log(string input, Plugin.LogLevel logLvl)
         {
-            if (logLvl >= LogLevel.Info || debug) Console.WriteLine("[Beat Saber Tweaks]: " + input);
+            if (logLvl >= LogLevel.Info || debug) Console.WriteLine("[BeatSaberTweaks]: " + input);
         }
     }
 }
