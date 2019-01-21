@@ -44,6 +44,10 @@ namespace BeatSaberTweaks
         public static bool ShowClock { get => instance.showclock; set => instance.showclock = value; }
 
         [SerializeField]
+        bool hideClockIngame = false;
+        public static bool HideClockIngame { get => instance.hideClockIngame; set => instance.hideClockIngame = value; }
+
+        [SerializeField]
         bool use24hrClock = false;
         public static bool Use24hrClock { get => instance.use24hrClock; set => instance.use24hrClock = value; }
 
@@ -58,6 +62,11 @@ namespace BeatSaberTweaks
         [SerializeField]
         Vector3 clockRotation = new Vector3(0, 0, 0);
         public static Quaternion ClockRotation { get => Quaternion.Euler(instance.clockRotation); set => instance.clockPosition = value.eulerAngles; }
+
+        [SerializeField]
+        String clockAlignment = "center";
+        public static String ClockAlignment { get => instance.clockAlignment; set => instance.clockAlignment = value; }
+
 
         // Time Spent Clock
         [SerializeField]
@@ -84,6 +93,10 @@ namespace BeatSaberTweaks
         Vector3 timeSpentClockRotation = new Vector3(0, 0, 0);
         public static Quaternion TimeSpentClockRotation { get => Quaternion.Euler(instance.timeSpentClockRotation); set => instance.timeSpentClockRotation = value.eulerAngles; }
 
+        [SerializeField]
+        String timeSpentClockAlignment = "center";
+        public static String TimeSpentClockAlignment { get => instance.timeSpentClockAlignment; set => instance.timeSpentClockAlignment = value; }
+
         // Ingame Time Spent Clock
         [SerializeField]
         bool showIngameTimeSpentClock = false;
@@ -108,6 +121,10 @@ namespace BeatSaberTweaks
         [SerializeField]
         String ingameTimeSpentClockMessageTemplate = "You've played %TIME% this session.";
         public static String IngameTimeSpentClockMessageTemplate { get => instance.ingameTimeSpentClockMessageTemplate; set => instance.ingameTimeSpentClockMessageTemplate = value; }
+
+        [SerializeField]
+        String ingameTimeSpentClockAlignment = "center";
+        public static String IngameTimeSpentClockAlignment { get => instance.ingameTimeSpentClockAlignment; set => instance.ingameTimeSpentClockAlignment = value; }
 
         // Move Energy Bar
         [SerializeField]

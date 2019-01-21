@@ -76,7 +76,7 @@ namespace BeatSaberTweaks
 
                     _Text = textGO.AddComponent<TextMeshProUGUI>();
                     _Text.name = "TimeSpentClock Text";
-                    _Text.alignment = TextAlignmentOptions.Center;
+                    _Text.alignment = Utilites.TextAlignUtil.textAlignFromString(Settings.ClockAlignment); 
                     _Text.fontSize = _TimeSize;
                     _Text.text = "";
 
