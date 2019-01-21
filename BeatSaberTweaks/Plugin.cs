@@ -21,6 +21,7 @@ namespace BeatSaberTweaks
         private static StandardLevelDetailViewController _soloDetailView;
         private static bool debug = false;
         public static bool party { get; private set; } = false;
+        public static bool saveRequested = false;
 
         public static string _gameplayMode { get; private set; }
         public enum LogLevel
@@ -73,8 +74,12 @@ namespace BeatSaberTweaks
                 {
                     _partyFlowCoordinator = Resources.FindObjectsOfTypeAll<PartyFreePlayFlowCoordinator>().FirstOrDefault();
                 }
-
-
+                
+                if (saveRequested)
+                {
+                    Settings.Save();
+                    saveRequested = false;
+                }
             }
         }
 
@@ -91,9 +96,7 @@ namespace BeatSaberTweaks
             party = _partyFlowCoordinator.isActivated;
             Log(party.ToString(), Plugin.LogLevel.Info);
         }
-
-
-
+        
         private void _characteristicViewController_didSelectBeatmapCharacteristicEvent(BeatmapCharacteristicSelectionViewController arg1, BeatmapCharacteristicSO arg2)
         {
             _gameplayMode = arg2.characteristicName;

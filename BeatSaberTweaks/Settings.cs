@@ -15,158 +15,158 @@ namespace BeatSaberTweaks
         // Settings version
         [SerializeField]
         string settingsVersion = "0.0.0";
-        public static string SettingsVersion { get => instance.settingsVersion; set => instance.settingsVersion = value; }
+        public static string SettingsVersion { get => instance.settingsVersion; set { instance.settingsVersion = value; Plugin.saveRequested = true; } }
 
         // Note Volume controls
         [SerializeField]
         float noteHitVolume = 1.0f;
-        public static float NoteHitVolume { get => instance.noteHitVolume; set => instance.noteHitVolume = value; }
+        public static float NoteHitVolume { get => instance.noteHitVolume; set { instance.noteHitVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float noteMissVolume = 1.0f;
-        public static float NoteMissVolume { get => instance.noteMissVolume; set => instance.noteMissVolume = value; }
+        public static float NoteMissVolume { get => instance.noteMissVolume; set { instance.noteMissVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float musicVolume = 1.0f;
-        public static float MusicVolume { get => instance.musicVolume; set => instance.musicVolume = value; }
+        public static float MusicVolume { get => instance.musicVolume; set { instance.musicVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float previewVolume = 1.0f;
-        public static float PreviewVolume { get => instance.previewVolume; set => instance.previewVolume = value; }
+        public static float PreviewVolume { get => instance.previewVolume; set { instance.previewVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float menuBGVolume = 1.0f;
-        public static float MenuBGVolume { get => instance.menuBGVolume; set => instance.menuBGVolume = value; }
+        public static float MenuBGVolume { get => instance.menuBGVolume; set { instance.menuBGVolume = value; Plugin.saveRequested = true; } }
 
         // In Game Clock
         [SerializeField]
         bool showclock = false;
-        public static bool ShowClock { get => instance.showclock; set => instance.showclock = value; }
+        public static bool ShowClock { get => instance.showclock; set { instance.showclock = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool hideClockIngame = false;
-        public static bool HideClockIngame { get => instance.hideClockIngame; set => instance.hideClockIngame = value; }
+        public static bool HideClockIngame { get => instance.hideClockIngame; set { instance.hideClockIngame = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool use24hrClock = false;
-        public static bool Use24hrClock { get => instance.use24hrClock; set => instance.use24hrClock = value; }
+        public static bool Use24hrClock { get => instance.use24hrClock; set { instance.use24hrClock = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float clockFontSize = 4.0f;
-        public static float ClockFontSize { get => instance.clockFontSize; set => instance.clockFontSize = value; }
+        public static float ClockFontSize { get => instance.clockFontSize; set { instance.clockFontSize = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         Vector3 clockPosition = new Vector3(0, 2.4f, 2.4f);
-        public static Vector3 ClockPosition { get => instance.clockPosition; set => instance.clockPosition = value; }
+        public static Vector3 ClockPosition { get => instance.clockPosition; set { instance.clockPosition = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         Vector3 clockRotation = new Vector3(0, 0, 0);
-        public static Quaternion ClockRotation { get => Quaternion.Euler(instance.clockRotation); set => instance.clockPosition = value.eulerAngles; }
+        public static Quaternion ClockRotation { get => Quaternion.Euler(instance.clockRotation); set { instance.clockPosition = value.eulerAngles; Plugin.saveRequested = true; } }
 
         [SerializeField]
         String clockAlignment = "center";
-        public static String ClockAlignment { get => instance.clockAlignment; set => instance.clockAlignment = value; }
+        public static String ClockAlignment { get => instance.clockAlignment; set { instance.clockAlignment = value; Plugin.saveRequested = true; } }
 
 
         // Time Spent Clock
         [SerializeField]
         bool showTimeSpentClock = false;
-        public static bool ShowTimeSpentClock { get => instance.showTimeSpentClock; set => instance.showTimeSpentClock = value; }
+        public static bool ShowTimeSpentClock { get => instance.showTimeSpentClock; set { instance.showTimeSpentClock = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool hideTimeSpentClockIngame = true;
-        public static bool HideTimeSpentClockIngame { get => instance.hideTimeSpentClockIngame; set => instance.hideTimeSpentClockIngame = value; }
+        public static bool HideTimeSpentClockIngame { get => instance.hideTimeSpentClockIngame; set { instance.hideTimeSpentClockIngame = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         String timeSpentClockMessageTemplate = "You've spent %TIME% in this session.";
-        public static String TimeSpentClockMessageTemplate { get => instance.timeSpentClockMessageTemplate; set => instance.timeSpentClockMessageTemplate = value; }
+        public static String TimeSpentClockMessageTemplate { get => instance.timeSpentClockMessageTemplate; set { instance.timeSpentClockMessageTemplate = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float timeSpentClockFontSize = 4.0f;
-        public static float TimeSpentClockFontSize { get => instance.timeSpentClockFontSize; set => instance.timeSpentClockFontSize = value; }
+        public static float TimeSpentClockFontSize { get => instance.timeSpentClockFontSize; set { instance.timeSpentClockFontSize = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         Vector3 timeSpentClockPosition = new Vector3(0, 0.35f, 2.4f);
-        public static Vector3 TimeSpentClockPosition { get => instance.timeSpentClockPosition; set => instance.timeSpentClockPosition = value; }
+        public static Vector3 TimeSpentClockPosition { get => instance.timeSpentClockPosition; set { instance.timeSpentClockPosition = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         Vector3 timeSpentClockRotation = new Vector3(0, 0, 0);
-        public static Quaternion TimeSpentClockRotation { get => Quaternion.Euler(instance.timeSpentClockRotation); set => instance.timeSpentClockRotation = value.eulerAngles; }
+        public static Quaternion TimeSpentClockRotation { get => Quaternion.Euler(instance.timeSpentClockRotation); set { instance.timeSpentClockRotation = value.eulerAngles; Plugin.saveRequested = true; } }
 
         [SerializeField]
         String timeSpentClockAlignment = "center";
-        public static String TimeSpentClockAlignment { get => instance.timeSpentClockAlignment; set => instance.timeSpentClockAlignment = value; }
+        public static String TimeSpentClockAlignment { get => instance.timeSpentClockAlignment; set { instance.timeSpentClockAlignment = value; Plugin.saveRequested = true; } }
 
         // Ingame Time Spent Clock
         [SerializeField]
         bool showIngameTimeSpentClock = false;
-        public static bool ShowIngameTimeSpentClock { get => instance.showIngameTimeSpentClock; set => instance.showIngameTimeSpentClock = value; }
+        public static bool ShowIngameTimeSpentClock { get => instance.showIngameTimeSpentClock; set { instance.showIngameTimeSpentClock = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool hideIngameTimeSpentClockIngame = true;
-        public static bool HideIngameTimeSpentClockIngame { get => instance.hideIngameTimeSpentClockIngame; set => instance.hideIngameTimeSpentClockIngame = value; }
+        public static bool HideIngameTimeSpentClockIngame { get => instance.hideIngameTimeSpentClockIngame; set { instance.hideIngameTimeSpentClockIngame = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float ingameTimeSpentClockFontSize = 4.0f;
-        public static float IngameTimeSpentClockFontSize { get => instance.ingameTimeSpentClockFontSize; set => instance.ingameTimeSpentClockFontSize = value; }
+        public static float IngameTimeSpentClockFontSize { get => instance.ingameTimeSpentClockFontSize; set { instance.ingameTimeSpentClockFontSize = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         Vector3 ingameTimeSpentClockPosition = new Vector3(0, 0.25f, 2.4f);
-        public static Vector3 IngameTimeSpentClockPosition { get => instance.ingameTimeSpentClockPosition; set => instance.ingameTimeSpentClockPosition = value; }
+        public static Vector3 IngameTimeSpentClockPosition { get => instance.ingameTimeSpentClockPosition; set { instance.ingameTimeSpentClockPosition = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         Vector3 ingameTimeSpentClockRotation = new Vector3(0, 0, 0);
-        public static Quaternion IngameTimeSpentClockRotation { get => Quaternion.Euler(instance.ingameTimeSpentClockRotation); set => instance.ingameTimeSpentClockRotation = value.eulerAngles; }
+        public static Quaternion IngameTimeSpentClockRotation { get => Quaternion.Euler(instance.ingameTimeSpentClockRotation); set { instance.ingameTimeSpentClockRotation = value.eulerAngles; Plugin.saveRequested = true; } }
 
         [SerializeField]
         String ingameTimeSpentClockMessageTemplate = "You've played %TIME% this session.";
-        public static String IngameTimeSpentClockMessageTemplate { get => instance.ingameTimeSpentClockMessageTemplate; set => instance.ingameTimeSpentClockMessageTemplate = value; }
+        public static String IngameTimeSpentClockMessageTemplate { get => instance.ingameTimeSpentClockMessageTemplate; set { instance.ingameTimeSpentClockMessageTemplate = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         String ingameTimeSpentClockAlignment = "center";
-        public static String IngameTimeSpentClockAlignment { get => instance.ingameTimeSpentClockAlignment; set => instance.ingameTimeSpentClockAlignment = value; }
+        public static String IngameTimeSpentClockAlignment { get => instance.ingameTimeSpentClockAlignment; set { instance.ingameTimeSpentClockAlignment = value; Plugin.saveRequested = true; } }
 
         // Move Energy Bar
         [SerializeField]
         bool moveEnergyBar = false;
-        public static bool MoveEnergyBar { get => instance.moveEnergyBar; set => instance.moveEnergyBar = value; }
+        public static bool MoveEnergyBar { get => instance.moveEnergyBar; set { instance.moveEnergyBar = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float energyBarHeight = 3.0f;
-        public static float EnergyBarHeight { get => instance.energyBarHeight; set => instance.energyBarHeight = value; }
+        public static float EnergyBarHeight { get => instance.energyBarHeight; set { instance.energyBarHeight = value; Plugin.saveRequested = true; } }
 
         // Move Score
         [SerializeField]
         bool moveScore = false;
-        public static bool MoveScore { get => instance.moveScore; set => instance.moveScore = value; }
+        public static bool MoveScore { get => instance.moveScore; set { instance.moveScore = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float scoreSize = 2.0f;
-        public static float ScoreSize { get => instance.scoreSize; set => instance.scoreSize = value; }
+        public static float ScoreSize { get => instance.scoreSize; set { instance.scoreSize = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         Vector3 scorePosition = new Vector3(3.25f, 3.25f, 7.0f);
-        public static Vector3 ScorePosition { get => instance.scorePosition; set => instance.scorePosition = value; }
+        public static Vector3 ScorePosition { get => instance.scorePosition; set { instance.scorePosition = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool noArrows = false;
-        public static bool NoArrows { get => instance.noArrows; set => instance.noArrows = value; }
+        public static bool NoArrows { get => instance.noArrows; set { instance.noArrows = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool oneColour = false;
-        public static bool OneColour { get => instance.oneColour; set => instance.oneColour = value; }
+        public static bool OneColour { get => instance.oneColour; set { instance.oneColour = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool removeBombs = false;
-        public static bool RemoveBombs { get => instance.removeBombs; set => instance.removeBombs = value; }
+        public static bool RemoveBombs { get => instance.removeBombs; set { instance.removeBombs = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         bool overrideJumpSpeed = false;
-        public static bool OverrideJumpSpeed { get => instance.overrideJumpSpeed; set => instance.overrideJumpSpeed = value; }
+        public static bool OverrideJumpSpeed { get => instance.overrideJumpSpeed; set { instance.overrideJumpSpeed = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
         float noteJumpSpeed = 10.0f;
-        public static float NoteJumpSpeed { get => instance.noteJumpSpeed; set => instance.noteJumpSpeed = value; }
+        public static float NoteJumpSpeed { get => instance.noteJumpSpeed; set { instance.noteJumpSpeed = value; Plugin.saveRequested = true; } }
 
         public Settings()
         {
