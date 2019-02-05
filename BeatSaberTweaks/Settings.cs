@@ -19,11 +19,11 @@ namespace BeatSaberTweaks
 
         // Note Volume controls
         [SerializeField]
-        float noteHitVolume = 1.0f;
+        float noteHitVolume = 0.5f;
         public static float NoteHitVolume { get => instance.noteHitVolume; set { instance.noteHitVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
-        float noteMissVolume = 1.0f;
+        float noteMissVolume = 0.9f;
         public static float NoteMissVolume { get => instance.noteMissVolume; set { instance.noteMissVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
