@@ -240,6 +240,37 @@ namespace BeatSaberTweaks
                 Console.WriteLine("Error trying to add comment to volume tweaks settings page:" + e);
             }
 
+            var volumeComment2 = subMenu1.AddBool("<align=\"center\"><b><color=\"red\">Increasing past the default may cause audio issues!</color></b></align>",
+                "These sound effects are loud. When the volume is increased, the audio spam seems to be overloading the audio system, causing audio dropouts, and even lag. It takes a LOT of stacking to make this happen, so it only happens on certain maps.");
+
+            volumeComment2.GetValue += delegate { return false; };
+            volumeComment2.SetValue += delegate (bool value) { };
+
+            // Hack to convert the boolean toggle into a text only comment
+            // This disables the arrows and the value display
+            try
+            {
+                // Note:
+                // To get objects from inherited class through reflection, use object.GetType().BaseType
+                // Here I do it twice to go up two levels in the heiarchy
+                var buttonToDisable = volumeComment2.GetType().BaseType.BaseType.GetField("_decButton", BindingFlags.NonPublic | BindingFlags.Instance);
+                var decButton = (MonoBehaviour)buttonToDisable.GetValue(volumeComment2);
+                buttonToDisable = volumeComment2.GetType().BaseType.BaseType.GetField("_incButton", BindingFlags.NonPublic | BindingFlags.Instance);
+                var incButton = (MonoBehaviour)buttonToDisable.GetValue(volumeComment2);
+
+                decButton.gameObject.SetActive(false);
+                incButton.gameObject.SetActive(false);
+
+                var textToDisable = volumeComment2.GetType().BaseType.BaseType.GetField("_text", BindingFlags.NonPublic | BindingFlags.Instance);
+                var uselessText = (MonoBehaviour)textToDisable.GetValue(volumeComment2);
+
+                uselessText.gameObject.SetActive(false);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error trying to add comment to volume tweaks settings page:" + e);
+            }
+
             var noteHit = subMenu1.AddList("Note Hit Volume", incrementValues(), "The volume for the note cut sound effect.");
             noteHit.GetValue += delegate { return Settings.NoteHitVolume; };
             noteHit.SetValue += delegate (float value) { Settings.NoteHitVolume = value; };
