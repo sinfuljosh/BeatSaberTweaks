@@ -12,6 +12,9 @@ namespace BeatSaberTweaks
     {
         static Settings instance = null;
 
+        private static float defaultNoteHitVolume = 0.5f;
+        private static float defaultNoteMissVolume = 0.9f;
+
         // Settings version
         [SerializeField]
         string settingsVersion = "0.0.0";
@@ -19,11 +22,11 @@ namespace BeatSaberTweaks
 
         // Note Volume controls
         [SerializeField]
-        float noteHitVolume = 0.5f;
+        float noteHitVolume = defaultNoteHitVolume;
         public static float NoteHitVolume { get => instance.noteHitVolume; set { instance.noteHitVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
-        float noteMissVolume = 0.9f;
+        float noteMissVolume = defaultNoteMissVolume;
         public static float NoteMissVolume { get => instance.noteMissVolume; set { instance.noteMissVolume = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
@@ -202,6 +205,11 @@ namespace BeatSaberTweaks
                     instance.noteHitVolume = instance.noteHitVolume * 0.5f;
                     instance.noteMissVolume = instance.noteMissVolume * 0.9f;
                     Plugin.Log("Settings conversion finished!", Plugin.LogLevel.Error);
+                }else if (instance.settingsVersion.Equals("4.2.2") || instance.settingsVersion.Equals("4.2.3"))
+                {
+                    Plugin.Log("Old config found! Setting SFX volume to default values, if they are at dangerous levels", Plugin.LogLevel.Error);
+                    if (instance.noteHitVolume > defaultNoteHitVolume) instance.noteHitVolume = defaultNoteHitVolume;
+                    if (instance.noteMissVolume > defaultNoteMissVolume) instance.noteMissVolume = defaultNoteMissVolume;
                 }
             }
         }

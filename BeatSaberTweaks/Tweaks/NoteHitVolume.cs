@@ -16,9 +16,6 @@ namespace BeatSaberTweaks
     {
         public static NoteHitVolume Instance;
 
-        static float normalVolume = 0;
-        static float normalMissVolume = 0;
-
         const string goodCutString = "_goodCutVolume";
         const string badCutString = "_badCutVolume";
 
