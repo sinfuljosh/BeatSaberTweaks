@@ -150,7 +150,8 @@ namespace BeatSaberTweaks
         [SerializeField]
         Vector3 scorePosition = new Vector3(3.25f, 3.25f, 7.0f);
         public static Vector3 ScorePosition { get => instance.scorePosition; set { instance.scorePosition = value; Plugin.saveRequested = true; } }
-
+        
+        // Party Tweaks
         [SerializeField]
         bool noArrows = false;
         public static bool NoArrows { get => instance.noArrows; set { instance.noArrows = value; Plugin.saveRequested = true; } }
@@ -170,6 +171,11 @@ namespace BeatSaberTweaks
         [SerializeField]
         float noteJumpSpeed = 10.0f;
         public static float NoteJumpSpeed { get => instance.noteJumpSpeed; set { instance.noteJumpSpeed = value; Plugin.saveRequested = true; } }
+
+        // Menu Tweaks
+        [SerializeField]
+        bool fireworksEnable = true;
+        public static bool FireworksEnable { get => instance.fireworksEnable; set { instance.fireworksEnable = value; Plugin.saveRequested = true; } }
 
         public Settings()
         {

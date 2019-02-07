@@ -58,6 +58,7 @@ namespace BeatSaberTweaks
                 OneColour.OnLoad(transform);
                 SongDataModifer.OnLoad(transform);
                 MusicVolume.OnLoad(transform);
+                FireworksTweaks.OnLoad(transform);
             }
             else
             {
