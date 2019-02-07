@@ -182,12 +182,12 @@ namespace BeatSaberTweaks
         public static bool ClickShockwaveEnable { get => instance.clickShockwaveEnable; set { instance.clickShockwaveEnable = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
-        bool hideFailsCounter = true;
-        public static bool HideFailsCounterEnable { get => instance.hideFailsCounter; set { instance.hideFailsCounter = value; Plugin.saveRequested = true; } }
+        bool showFailsCounter = true;
+        public static bool ShowFailsCounterEnable { get => instance.showFailsCounter; set { instance.showFailsCounter = value; Plugin.saveRequested = true; } }
 
         [SerializeField]
-        string hideFailsReplacementText = "HIDDEN";
-        public static string HideFailsReplacementText { get => instance.hideFailsReplacementText; set { instance.hideFailsReplacementText = value; Plugin.saveRequested = true; } }
+        string failsCounterReplacementText = "HIDDEN";
+        public static string FailsCounterReplacementText { get => instance.failsCounterReplacementText; set { instance.failsCounterReplacementText = value; Plugin.saveRequested = true; } }
 
         public Settings()
         {

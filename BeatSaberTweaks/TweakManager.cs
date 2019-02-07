@@ -230,15 +230,15 @@ namespace BeatSaberTweaks
             enableRippleEffect.GetValue += delegate { return Settings.ClickShockwaveEnable; };
             enableRippleEffect.SetValue += delegate (bool value) { Settings.ClickShockwaveEnable = value; };
 
-            var hideFailsCounter = subMenuInterfaceTweaks3.AddBool("Hide fails counter");
-            hideFailsCounter.EnabledText = "YES";
-            hideFailsCounter.DisabledText = "NO";
-            hideFailsCounter.GetValue += delegate { return Settings.HideFailsCounterEnable; };
-            hideFailsCounter.SetValue += delegate (bool value) { Settings.HideFailsCounterEnable = value; };
+            var showFailsCounter = subMenuInterfaceTweaks3.AddBool("Fails counter", "If the fails counter number should be visible on the stats screen.");
+            showFailsCounter.EnabledText = "VISIBLE";
+            showFailsCounter.DisabledText = "HIDDEN";
+            showFailsCounter.GetValue += delegate { return Settings.ShowFailsCounterEnable; };
+            showFailsCounter.SetValue += delegate (bool value) { Settings.ShowFailsCounterEnable = value; };
 
             var hideFailsReplacementText = subMenuInterfaceTweaks3.AddString("Replacement Text", "The text to replace the fails counter with.");
-            hideFailsReplacementText.GetValue += delegate { return Settings.HideFailsReplacementText; };
-            hideFailsReplacementText.SetValue += delegate (string value) { Settings.HideFailsReplacementText = value; };
+            hideFailsReplacementText.GetValue += delegate { return Settings.FailsCounterReplacementText; };
+            hideFailsReplacementText.SetValue += delegate (string value) { Settings.FailsCounterReplacementText = value; };
 
             // Volume Tweaks
             var subMenuVolumeTweaks = SettingsUI.CreateSubMenu("Volume Tweaks");

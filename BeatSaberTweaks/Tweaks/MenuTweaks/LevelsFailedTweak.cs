@@ -16,7 +16,7 @@ namespace BeatSaberTweaks
         public static LevelsFailedTweak Instance;
 
         private PlayerStatisticsViewController stats;
-        private bool hideFailCounter = false;
+        private bool showFailCounter = false;
         private bool loaded = false;
         private TextMeshProUGUI _failedLevelsCountText;
         private string failedLevelsCountReplacementText = "HIDDEN";
@@ -76,14 +76,14 @@ namespace BeatSaberTweaks
         private void Init()
         {
             Plugin.Log("Initialized!", Plugin.LogLevel.DebugOnly);
-            failedLevelsCountReplacementText = Settings.HideFailsReplacementText;
+            failedLevelsCountReplacementText = Settings.FailsCounterReplacementText;
 
-            hideFailCounter = Settings.HideFailsCounterEnable;
+            showFailCounter = Settings.ShowFailsCounterEnable;
         }
 
         public void Update()
         {
-            if (hideFailCounter && loaded)
+            if (!showFailCounter && loaded)
             {
                 if (_failedLevelsCountText == null)
                 {
