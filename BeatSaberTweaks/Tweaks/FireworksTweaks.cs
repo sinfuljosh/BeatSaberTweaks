@@ -45,7 +45,7 @@ namespace BeatSaberTweaks
         {
             try
             {
-                if (SceneUtils.isGameScene(scene))
+                if (SceneUtils.isMenuScene(scene))
                 {
                     StartCoroutine(WaitForLoad());
                 }
@@ -91,22 +91,29 @@ namespace BeatSaberTweaks
 
         public void Update()
         {
+            //Plugin.Log("Updating fireworks tweaks!", Plugin.LogLevel.DebugOnly);
             //Plugin.Log("resultsViewController.enabled: " + resultsViewController.enabled, Plugin.LogLevel.DebugOnly);
             if (fireworksController == null && loaded)
             {
+                Plugin.Log("fireworksController is null!", Plugin.LogLevel.DebugOnly);
                 if (resultsViewController == null)
                     resultsViewController = Resources.FindObjectsOfTypeAll<ResultsViewController>().FirstOrDefault();
                 else
                     fireworksController = Resources.FindObjectsOfTypeAll<FireworksController>().FirstOrDefault();
             }
-            else if (resultsViewController.enabled && leftGameCoreScene && fireworksController.enabled)
+            else if (resultsViewController.enabled && fireworksController.enabled)
             {
+                Plugin.Log("fireworksController.enabled", Plugin.LogLevel.DebugOnly);
                 if (!isEnabled)
                 {
+                    Plugin.Log("isEnabled is false", Plugin.LogLevel.DebugOnly);
                     fireworksController.enabled = false;
                     // Delete any fireworks that were generated before it could be disabled
                     var fireworkItemController = Resources.FindObjectsOfTypeAll<FireworkItemController>().FirstOrDefault();
                     GameObject.Destroy(fireworkItemController);
+                } else
+                {
+                    Plugin.Log("isEnabled is true", Plugin.LogLevel.DebugOnly);
                 }
             }
         }
