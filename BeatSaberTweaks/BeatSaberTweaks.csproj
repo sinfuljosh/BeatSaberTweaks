@@ -89,8 +89,10 @@
   <ItemGroup>
     <Compile Include="HarmonyPatches\AudioPitchGainEffectStartEffect.cs" />
     <Compile Include="HarmonyPatches\SongPreviewPlayerCrossfadeTo.cs" />
-    <Compile Include="Tweaks\FireworksTweaks.cs" />
+    <Compile Include="Tweaks\MenuTweaks\FireworksTweaks.cs" />
     <Compile Include="Tweaks\IngameTimeSpentClock.cs" />
+    <Compile Include="Tweaks\MenuTweaks\ClickShockwave.cs" />
+    <Compile Include="Tweaks\MenuTweaks\LevelsFailedTweak.cs" />
     <Compile Include="Tweaks\MusicVolume.cs" />
     <Compile Include="Tweaks\OneColour.cs" />
     <Compile Include="Tweaks\SongDataModifer.cs" />

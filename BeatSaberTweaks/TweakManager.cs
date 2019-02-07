@@ -59,6 +59,8 @@ namespace BeatSaberTweaks
                 SongDataModifer.OnLoad(transform);
                 MusicVolume.OnLoad(transform);
                 FireworksTweaks.OnLoad(transform);
+                ClickShockwave.OnLoad(transform);
+                LevelsFailedTweak.OnLoad(transform);
             }
             else
             {
@@ -221,6 +223,22 @@ namespace BeatSaberTweaks
             enableFireworksTweaks.DisabledText = "OFF";
             enableFireworksTweaks.GetValue += delegate { return Settings.FireworksEnable; };
             enableFireworksTweaks.SetValue += delegate (bool value) { Settings.FireworksEnable = value; };
+
+            var enableRippleEffect = subMenuInterfaceTweaks3.AddBool("Click ripple effect");
+            enableRippleEffect.EnabledText = "ON";
+            enableRippleEffect.DisabledText = "OFF";
+            enableRippleEffect.GetValue += delegate { return Settings.ClickShockwaveEnable; };
+            enableRippleEffect.SetValue += delegate (bool value) { Settings.ClickShockwaveEnable = value; };
+
+            var hideFailsCounter = subMenuInterfaceTweaks3.AddBool("Hide fails counter");
+            hideFailsCounter.EnabledText = "YES";
+            hideFailsCounter.DisabledText = "NO";
+            hideFailsCounter.GetValue += delegate { return Settings.HideFailsCounterEnable; };
+            hideFailsCounter.SetValue += delegate (bool value) { Settings.HideFailsCounterEnable = value; };
+
+            var hideFailsReplacementText = subMenuInterfaceTweaks3.AddString("Replacement Text", "The text to replace the fails counter with.");
+            hideFailsReplacementText.GetValue += delegate { return Settings.HideFailsReplacementText; };
+            hideFailsReplacementText.SetValue += delegate (string value) { Settings.HideFailsReplacementText = value; };
 
             // Volume Tweaks
             var subMenuVolumeTweaks = SettingsUI.CreateSubMenu("Volume Tweaks");
