@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using IllusionPlugin;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -52,7 +51,7 @@ namespace BeatSaberTweaks
             }
             catch (Exception e)
             {
-                Plugin.Log("Tweaks (FireworksTweaks) done fucked up: " + e, Plugin.LogLevel.Error);
+                Plugin.Log("Tweaks (FireworksTweaks) messed up: " + e, Plugin.LogLevel.Error);
             }
         }
 
