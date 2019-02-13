@@ -79,7 +79,9 @@ namespace BeatSaberTweaks
 
         public void Update()
         {
-            if (menuShockwave == null && loaded)
+            if (!loaded) return;
+
+            if (menuShockwave == null)
             {
                 menuShockwave = Resources.FindObjectsOfTypeAll<MenuShockwave>().FirstOrDefault();
             }

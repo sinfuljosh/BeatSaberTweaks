@@ -90,15 +90,18 @@ namespace BeatSaberTweaks
 
         public void Update()
         {
-            //Plugin.Log("Updating fireworks tweaks!", Plugin.LogLevel.DebugOnly);
-            //Plugin.Log("resultsViewController.enabled: " + resultsViewController.enabled, Plugin.LogLevel.DebugOnly);
-            if (fireworksController == null && loaded)
+            Plugin.Log("Updating fireworks tweaks!", Plugin.LogLevel.DebugOnly);
+            if (!loaded) return;
+
+            if (resultsViewController == null)
+            {
+                Plugin.Log("resultsViewController is null!", Plugin.LogLevel.DebugOnly);
+                resultsViewController = Resources.FindObjectsOfTypeAll<ResultsViewController>().FirstOrDefault();
+            }
+            else if (fireworksController == null)
             {
                 Plugin.Log("fireworksController is null!", Plugin.LogLevel.DebugOnly);
-                if (resultsViewController == null)
-                    resultsViewController = Resources.FindObjectsOfTypeAll<ResultsViewController>().FirstOrDefault();
-                else
-                    fireworksController = Resources.FindObjectsOfTypeAll<FireworksController>().FirstOrDefault();
+                fireworksController = Resources.FindObjectsOfTypeAll<FireworksController>().FirstOrDefault();
             }
             else if (resultsViewController.enabled && fireworksController.enabled)
             {
@@ -107,6 +110,7 @@ namespace BeatSaberTweaks
                 {
                     Plugin.Log("isEnabled is false", Plugin.LogLevel.DebugOnly);
                     fireworksController.enabled = false;
+
                     // Delete any fireworks that were generated before it could be disabled
                     var fireworkItemController = Resources.FindObjectsOfTypeAll<FireworkItemController>().FirstOrDefault();
                     GameObject.Destroy(fireworkItemController);
