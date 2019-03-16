@@ -33,12 +33,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\Beat Saber\Beat Saber_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BeatSaberCustomUI">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Beat Saber\Plugins\BeatSaberCustomUI.dll</HintPath>
+
+      <HintPath>..\..\..\..\..\Program Files\Steam\steamapps\common\Beat Saber\Plugins\BeatSaberCustomUI.dll</HintPath>
+
     </Reference>
     <Reference Include="IllusionPlugin">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\IllusionPlugin.dll</HintPath>
@@ -84,16 +89,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HarmonyPatches\AudioPitchGainEffectStartEffect.cs" />
+    <Compile Include="HarmonyPatches\SongPreviewPlayerCrossfadeTo.cs" />
+    <Compile Include="Tweaks\MenuTweaks\FireworksTweaks.cs" />
+    <Compile Include="Tweaks\IngameTimeSpentClock.cs" />
+    <Compile Include="Tweaks\MenuTweaks\ClickShockwave.cs" />
+    <Compile Include="Tweaks\MenuTweaks\LevelsFailedTweak.cs" />
+    <Compile Include="Tweaks\MusicVolume.cs" />
     <Compile Include="Tweaks\OneColour.cs" />
     <Compile Include="Tweaks\SongDataModifer.cs" />
-    <Compile Include="Tweaks\MenuBGVolume.cs" />
     <Compile Include="Tweaks\ScoreMover.cs" />
+    <Compile Include="Tweaks\TimeSpentClock.cs" />
     <Compile Include="Utilites\ConInput.cs" />
     <Compile Include="Utilites\Ryder.Lightweight.cs" />
     <Compile Include="Utilites\SceneEvents.cs" />
     <Compile Include="Utilites\SceneLoadHandler.cs" />
     <Compile Include="Utilites\SceneUtils.cs" />
     <Compile Include="Utilites\TableViewHelper.cs" />
+    <Compile Include="Utilites\TextAlignUtil.cs" />
     <Compile Include="ViewControllers\HiddenNotesSettingsController.cs" />
     <Compile Include="Tweaks\InGameClock.cs" />
     <Compile Include="Tweaks\MoveEnergyBar.cs" />

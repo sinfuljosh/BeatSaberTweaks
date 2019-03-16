@@ -7,12 +7,10 @@ namespace BeatSaberTweaks
 {
     public class Plugin : IPlugin
     {
+        public static string versionNumber = "4.3.1";
+
         public string Name => "Beat Saber Tweaks";
-#if NewUI
-        public string Version => "4.0";
-#else
-        public string Version => "3.3.2";
-#endif
+        public string Version => versionNumber;
 
         private bool _init = false;
         private BeatmapCharacteristicSelectionViewController _characteristicViewController;
@@ -21,8 +19,9 @@ namespace BeatSaberTweaks
 
         private static PracticeViewController _practiceViewController;
         private static StandardLevelDetailViewController _soloDetailView;
-        private static bool debug = true;
+        private static bool debug = false;
         public static bool party { get; private set; } = false;
+        public static bool saveRequested = false;
 
         public static string _gameplayMode { get; private set; }
         public enum LogLevel
@@ -38,7 +37,6 @@ namespace BeatSaberTweaks
             _init = true;
 
             Settings.Load();
-            //SettingsUI.OnLoad();
             TweakManager.OnLoad();
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
         }
@@ -76,8 +74,12 @@ namespace BeatSaberTweaks
                 {
                     _partyFlowCoordinator = Resources.FindObjectsOfTypeAll<PartyFreePlayFlowCoordinator>().FirstOrDefault();
                 }
-
-
+                
+                if (saveRequested)
+                {
+                    Settings.Save();
+                    saveRequested = false;
+                }
             }
         }
 
@@ -94,9 +96,7 @@ namespace BeatSaberTweaks
             party = _partyFlowCoordinator.isActivated;
             Log(party.ToString(), Plugin.LogLevel.Info);
         }
-
-
-
+        
         private void _characteristicViewController_didSelectBeatmapCharacteristicEvent(BeatmapCharacteristicSelectionViewController arg1, BeatmapCharacteristicSO arg2)
         {
             _gameplayMode = arg2.characteristicName;
@@ -125,7 +125,7 @@ namespace BeatSaberTweaks
 
         public static void Log(string input, Plugin.LogLevel logLvl)
         {
-            if (logLvl >= LogLevel.Info || debug) Console.WriteLine("[! ! ! ! Beat Saber Tweaks ! ! ! !]: " + input);
+            if (logLvl >= LogLevel.Info || debug) Console.WriteLine("[BeatSaberTweaks]: " + input);
         }
     }
 }
