@@ -39,7 +39,7 @@ namespace BeatSaberTweaks
         {
             try
             {
-                if (scene.name == "Menu")
+                if (scene.name == "MenuCore")
                     {
                         if (model == null)
                         {

@@ -7,13 +7,12 @@ namespace BeatSaberTweaks
 {
     public class Plugin : IPlugin
     {
-        public static string versionNumber = "4.3.1";
+        public static string versionNumber = "4.4.0";
 
         public string Name => "Beat Saber Tweaks";
         public string Version => versionNumber;
 
         private bool _init = false;
-        private BeatmapCharacteristicSelectionViewController _characteristicViewController;
         private static SoloFreePlayFlowCoordinator _soloFlowCoordinator;
         private static PartyFreePlayFlowCoordinator _partyFlowCoordinator;
 
@@ -23,7 +22,6 @@ namespace BeatSaberTweaks
         public static bool party { get; private set; } = false;
         public static bool saveRequested = false;
 
-        public static string _gameplayMode { get; private set; }
         public enum LogLevel
         {
             DebugOnly = 0,
@@ -43,15 +41,9 @@ namespace BeatSaberTweaks
 
         private void SceneManager_activeSceneChanged(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.Scene arg1)
         {
-           if(arg1.name == "Menu")
+           if(arg1.name == "MenuCore")
             {
-                if (_characteristicViewController == null)
-                {
-                    _characteristicViewController = Resources.FindObjectsOfTypeAll<BeatmapCharacteristicSelectionViewController>().FirstOrDefault();
-                    if (_characteristicViewController == null) return;
 
-                    _characteristicViewController.didSelectBeatmapCharacteristicEvent += _characteristicViewController_didSelectBeatmapCharacteristicEvent;
-                }
 
                 if (_soloFlowCoordinator == null)
                 {
@@ -95,12 +87,7 @@ namespace BeatSaberTweaks
             Log("Play Button Press " , Plugin.LogLevel.Info);
             party = _partyFlowCoordinator.isActivated;
             Log(party.ToString(), Plugin.LogLevel.Info);
-        }
-        
-        private void _characteristicViewController_didSelectBeatmapCharacteristicEvent(BeatmapCharacteristicSelectionViewController arg1, BeatmapCharacteristicSO arg2)
-        {
-            _gameplayMode = arg2.characteristicName;
-        }
+        }      
 
         public void OnApplicationQuit()
         {
