@@ -68,7 +68,7 @@ namespace BeatSaberTweaks
                     ClockCanvas.transform.rotation = timeRot;
            //         ClockCanvas.transform.localScale = new Vector3(0.02f, 0.02f, 1.0f);
 
-                    text = CustomUI.BeatSaber.BeatSaberUI.CreateText(ClockCanvas.transform as RectTransform, "Clock Text", new Vector2(0, 0.05f));
+                    text = CustomUI.BeatSaber.BeatSaberUI.CreateText(ClockCanvas.transform as RectTransform, "Clock Text", new Vector2(0, 0.3f));
                     text.name = "Clock Text";
 
                     text.alignment = Utilites.TextAlignUtil.textAlignFromString(Settings.ClockAlignment);
