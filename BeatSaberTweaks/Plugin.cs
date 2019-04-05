@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using IllusionPlugin;
+using IPA;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace BeatSaberTweaks
 {
-    public class Plugin : IPlugin
+    public class Plugin : IBeatSaberPlugin
     {
-        public static string versionNumber = "4.4.1";
+        public static string versionNumber = "4.4.2";
 
         public string Name => "Beat Saber Tweaks";
         public string Version => versionNumber;
@@ -36,44 +38,8 @@ namespace BeatSaberTweaks
 
             Settings.Load();
             TweakManager.OnLoad();
-            UnityEngine.SceneManagement.SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
         }
 
-        private void SceneManager_activeSceneChanged(UnityEngine.SceneManagement.Scene arg0, UnityEngine.SceneManagement.Scene arg1)
-        {
-           if(arg1.name == "MenuCore")
-            {
-
-
-                if (_soloFlowCoordinator == null)
-                {
-                    _soloFlowCoordinator = Resources.FindObjectsOfTypeAll<SoloFreePlayFlowCoordinator>().FirstOrDefault();
-                    if (_soloFlowCoordinator == null) return;
-                    _soloDetailView = _soloFlowCoordinator.GetPrivateField<StandardLevelDetailViewController>("_levelDetailViewController");
-                   _practiceViewController = _soloFlowCoordinator.GetPrivateField<PracticeViewController>("_practiceViewController");
-                    if (_soloDetailView != null)
-                        _soloDetailView.didPressPlayButtonEvent += _soloDetailView_didPressPlayButtonEvent;
-                    else
-                        Log("Detail View Null", Plugin.LogLevel.Info);
-                    if (_practiceViewController != null)
-                        _practiceViewController.didPressPlayButtonEvent += _practiceViewController_didPressPlayButtonEvent; 
-                    else
-                        Log("Practice View Null", Plugin.LogLevel.Info);
-
-                }
-
-                if (_partyFlowCoordinator == null)
-                {
-                    _partyFlowCoordinator = Resources.FindObjectsOfTypeAll<PartyFreePlayFlowCoordinator>().FirstOrDefault();
-                }
-                
-                if (saveRequested)
-                {
-                    Settings.Save();
-                    saveRequested = false;
-                }
-            }
-        }
 
         private void _practiceViewController_didPressPlayButtonEvent()
         {
@@ -94,13 +60,6 @@ namespace BeatSaberTweaks
             Settings.Save();
         }
 
-        public void OnLevelWasLoaded(int level)
-        {
-        }
-
-        public void OnLevelWasInitialized(int level)
-        {
-        }
 
         public void OnUpdate()
         {
@@ -113,6 +72,52 @@ namespace BeatSaberTweaks
         public static void Log(string input, Plugin.LogLevel logLvl)
         {
             if (logLvl >= LogLevel.Info || debug) Console.WriteLine("[BeatSaberTweaks]: " + input);
+        }
+
+        public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+        {
+
+        }
+
+        public void OnSceneUnloaded(Scene scene)
+        {
+   
+        }
+
+        public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
+        {
+            if (nextScene.name == "MenuCore")
+            {
+
+
+                if (_soloFlowCoordinator == null)
+                {
+                    _soloFlowCoordinator = Resources.FindObjectsOfTypeAll<SoloFreePlayFlowCoordinator>().FirstOrDefault();
+                    if (_soloFlowCoordinator == null) return;
+                    _soloDetailView = _soloFlowCoordinator.GetPrivateField<StandardLevelDetailViewController>("_levelDetailViewController");
+                    _practiceViewController = _soloFlowCoordinator.GetPrivateField<PracticeViewController>("_practiceViewController");
+                    if (_soloDetailView != null)
+                        _soloDetailView.didPressPlayButtonEvent += _soloDetailView_didPressPlayButtonEvent;
+                    else
+                        Log("Detail View Null", Plugin.LogLevel.Info);
+                    if (_practiceViewController != null)
+                        _practiceViewController.didPressPlayButtonEvent += _practiceViewController_didPressPlayButtonEvent;
+                    else
+                        Log("Practice View Null", Plugin.LogLevel.Info);
+
+                }
+
+                if (_partyFlowCoordinator == null)
+                {
+                    _partyFlowCoordinator = Resources.FindObjectsOfTypeAll<PartyFreePlayFlowCoordinator>().FirstOrDefault();
+                }
+
+                if (saveRequested)
+                {
+                    Settings.Save();
+                    saveRequested = false;
+                }
+            }
         }
     }
 }

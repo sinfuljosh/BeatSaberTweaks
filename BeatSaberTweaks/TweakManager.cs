@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 using VRUI;
 using VRUIControls;
 using TMPro;
-using IllusionPlugin;
+using IPA;
 using CustomUI.BeatSaber;
 using CustomUI.Settings;
 using System.Reflection;
