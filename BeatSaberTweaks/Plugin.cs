@@ -63,6 +63,7 @@ namespace BeatSaberTweaks
 
         public void OnUpdate()
         {
+
         }
 
         public void OnFixedUpdate()
